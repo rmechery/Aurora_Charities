@@ -1,15 +1,14 @@
 package com.example.auroracharities;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
 import com.example.auroracharities.data.model.Charities;
-import com.example.auroracharities.RecyclerViewAdapter;
-import com.example.auroracharities.ClickListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +19,16 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private List<Charities> charitiesList;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseTest random = new FirebaseTest(db);
+        random.doStuff();
 
         charitiesList = new ArrayList<>();
         prepareCharities();
@@ -42,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(recyclerViewAdapter);
 
+
+
     }
 
 
     private void prepareCharities(){
-        charitiesList.add(new Charities("Charity 1", R.drawable.gfgimage));
+        charitiesList.add(new Charities("Charity 1", R.drawable.a4g_logo_background));
         charitiesList.add(new Charities("Charity 2", R.drawable.gfgimage));
         charitiesList.add(new Charities("Charity 3", R.drawable.gfgimage));
         charitiesList.add(new Charities("Charity 4", R.drawable.gfgimage));

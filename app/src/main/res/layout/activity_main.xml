@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@android:color/white">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/recyclerview_adapter_layout"/>
+        android:background="@android:color/white"
+        tools:listitem="@layout/recyclerview_adapter_layout" />
 </LinearLayout>
