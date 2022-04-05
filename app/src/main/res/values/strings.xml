@@ -10,4 +10,9 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="signInBtnStr">Sign In</string>
+
+    <string name="AddRequestPage">New Request</string>
+    <string name="NameLabelStr">Name of item</string>
+    <string name="EnterNameHintStr">Enter name of item:</string>
+    <string name="CategoryLabelStr">Category</string>
 </resources>
