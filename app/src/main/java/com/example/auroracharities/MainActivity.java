@@ -15,7 +15,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private List<Charities> charitiesList;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_homescreen);
 
         FirebaseTest random = new FirebaseTest(deezNuts);
         random.doStuff();

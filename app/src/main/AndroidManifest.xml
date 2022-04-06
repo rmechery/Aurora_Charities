@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AuroraCharities">
+<!--        <activity-->
+<!--            android:name=".Homescreen"-->
+<!--            android:exported="true" />-->
         <activity
-            android:name=".LoginActivity"
+            android:name=".Homescreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
