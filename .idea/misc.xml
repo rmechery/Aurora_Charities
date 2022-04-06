@@ -9,8 +9,9 @@
         <entry key="app/src/main/res/drawable/ic_a4g_logo__svg_.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.11640625" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33577287462022565" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22093353271484378" />
+        <entry key="app/src/main/res/layout/activity_homescreen.xml" value="0.21680348714192715" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2758026123046875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21334228515625" />
         <entry key="app/src/main/res/layout/recyclerview_adapter_layout.xml" value="0.21770833333333334" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/a4g_logo.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
