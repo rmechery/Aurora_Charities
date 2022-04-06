@@ -20,14 +20,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerViewAdapter recyclerViewAdapter;
     private List<Charities> charitiesList;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore deezNuts = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseTest random = new FirebaseTest(db);
+        FirebaseTest random = new FirebaseTest(deezNuts);
         random.doStuff();
 
         charitiesList = new ArrayList<>();
@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(recyclerViewAdapter);
-
-
 
     }
 
