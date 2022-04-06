@@ -10,4 +10,6 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="signInBtnStr">Sign In</string>
+    <string name="continueCharity">Continue as a Charity</string>
+    <string name="continueIndiv">Continue as an Individual</string>
 </resources>
