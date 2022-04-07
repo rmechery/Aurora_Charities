@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.auroracharities.data.model.Charities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -13,14 +14,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class FirebaseTest {
     private final FirebaseFirestore db;
     private final String TAG = "FirebaseTest";
+    private final ArrayList<Charities> charitiesList;
 
-    FirebaseTest(FirebaseFirestore db) {
+    public FirebaseTest(FirebaseFirestore db) {
         this.db = db;
+        charitiesList = new ArrayList<Charities>();
     }
 
     public void  doStuff(){
