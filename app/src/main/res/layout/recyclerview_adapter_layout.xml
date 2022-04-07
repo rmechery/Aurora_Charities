@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/carView"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     android:layout_margin="8dp"
     cardView:cardCornerRadius="8dp"
     cardView:cardElevation="8dp">
@@ -28,33 +28,33 @@
             android:layout_width="237dp"
             android:layout_height="55dp"
             android:layout_margin="8dp"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="monospace"
             android:gravity="center_vertical"
             android:lines="1"
             android:padding="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textStyle="normal"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.0"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.413"
             cardView:layout_constraintLeft_toRightOf="@id/image"
             cardView:layout_constraintRight_toRightOf="parent"
+            cardView:layout_constraintStart_toEndOf="@+id/image"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.0"
+            cardView:layout_constraintVertical_bias="0.082"
             tools:text="@tools:sample/full_names" />
 
         <TextView
             android:id="@+id/motto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            tools:text="@tools:sample/lorem/random"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.498"
-            cardView:layout_constraintStart_toStartOf="@+id/image"
-            cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="1.0" />
+            cardView:layout_constraintTop_toBottomOf="@+id/image"
+            cardView:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp"
+            tools:text="@tools:sample/lorem/random" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

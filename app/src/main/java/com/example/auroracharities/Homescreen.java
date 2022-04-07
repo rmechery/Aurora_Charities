@@ -2,6 +2,7 @@ package com.example.auroracharities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +20,12 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.continueToCharity:
-                setContentView(R.layout.activity_login);
+                startActivity(new Intent(Homescreen.this, LoginActivity.class));
+                //setContentView(R.layout.activity_login);
                 break;
             case R.id.continueToIndividual:
-                setContentView(R.layout.activity_main);
+                startActivity(new Intent(Homescreen.this, PublicMain.class));
+                //setContentView(R.layout.activity_public_main);
                 break;
         }
     }
