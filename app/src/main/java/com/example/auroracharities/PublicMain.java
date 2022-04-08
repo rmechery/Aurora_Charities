@@ -40,6 +40,9 @@ public class PublicMain extends AppCompatActivity {
                                 Map charityData = document.getData();
                                 Log.d(TAG, document.getId() + " => " + charityData);
                                 Log.v(TAG, (String)charityData.get("motto"));
+                                String motto = (String)charityData.get("motto");
+                                charitiesList.add(new Charities("Title", motto, R.drawable.a4g_logo_background));
+                                Log.v(TAG, charitiesList.toString());
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -56,9 +59,8 @@ public class PublicMain extends AppCompatActivity {
         setContentView(R.layout.activity_public_main);
 
         doStuff();
-
-        charitiesList = new ArrayList<>();
-        prepareCharities();
+        Log.v(TAG, charitiesList.toString());
+        //prepareCharities();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerViewAdapter = new RecyclerViewAdapter(charitiesList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -76,13 +78,13 @@ public class PublicMain extends AppCompatActivity {
 
     }
 
-    private void prepareCharities(){
-        charitiesList.add(new Charities("Charity 1", R.drawable.a4g_logo_background));
-        charitiesList.add(new Charities("Charity 2", R.drawable.gfgimage));
-        charitiesList.add(new Charities("Charity 3", R.drawable.gfgimage));
-        charitiesList.add(new Charities("Charity 4", R.drawable.gfgimage));
-        charitiesList.add(new Charities("Charity 5", R.drawable.gfgimage));
-        charitiesList.add(new Charities("Charity 6", R.drawable.gfgimage));
-        charitiesList.add(new Charities("Charity 7", R.drawable.gfgimage));
-    }
+//    private void prepareCharities(){
+//        charitiesList.add(new Charities("Charity 1", R.drawable.a4g_logo_background));
+//        charitiesList.add(new Charities("Charity 2", R.drawable.gfgimage));
+//        charitiesList.add(new Charities("Charity 3", R.drawable.gfgimage));
+//        charitiesList.add(new Charities("Charity 4", R.drawable.gfgimage));
+//        charitiesList.add(new Charities("Charity 5", R.drawable.gfgimage));
+//        charitiesList.add(new Charities("Charity 6", R.drawable.gfgimage));
+//        charitiesList.add(new Charities("Charity 7", R.drawable.gfgimage));
+//    }
 }

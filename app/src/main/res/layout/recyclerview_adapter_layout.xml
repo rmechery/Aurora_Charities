@@ -51,9 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toBottomOf="@+id/image"
             cardView:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp"
             tools:text="@tools:sample/lorem/random" />
 
 

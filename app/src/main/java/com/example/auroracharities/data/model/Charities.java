@@ -23,8 +23,14 @@ public class Charities {
         this.image = 0;
     }
 
-    public Charities(String title, int image) {
+//    public Charities(String title, int image) {
+//        this.title = title;
+//        this.image = image;
+//    }
+
+    public Charities(String title, String motto, int image) {
         this.title = title;
+        this.motto = motto;
         this.image = image;
     }
 
