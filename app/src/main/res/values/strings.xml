@@ -10,6 +10,19 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="signInBtnStr">Sign In</string>
-    <string name="continueCharity">Continue as a Charity</string>
-    <string name="continueIndiv">Continue as an Individual</string>
+
+    <string name="AddRequestPage">New Request</string>
+    <string name="NameLabelStr">Name of item</string>
+    <string name="EnterNameHintStr">Enter name of item:</string>
+    <string name="CategoryLabelStr">Category</string>
+
+
+    <string-array name="categories">
+        <item>Smaller toys/games (e.g. legos, jenga, RC cars)</item>
+        <item>Bikes, skooters, skateboards</item>
+        <item>Summer clothes</item>
+        <item>Winter clothes and gear</item>
+        <item>Hygiene items</item>
+    </string-array>
+
 </resources>
