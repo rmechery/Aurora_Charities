@@ -41,7 +41,7 @@ public class PublicMain extends AppCompatActivity {
                                 Log.d(TAG, document.getId() + " => " + charityData);
                                 Log.v(TAG, (String)charityData.get("motto"));
                                 String motto = (String)charityData.get("motto");
-                                charitiesList.add(new Charities("Title", motto, R.drawable.a4g_logo_background));
+                                charitiesList.add(new Charities("Title", motto, R.drawable.gfgimage));
                                 Log.v(TAG, charitiesList.toString());
                             }
                         } else {
