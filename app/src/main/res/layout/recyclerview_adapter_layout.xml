@@ -54,8 +54,7 @@
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toBottomOf="@+id/image"
             cardView:layout_constraintVertical_bias="0.0"
-            tools:text="@tools:sample/lorem/random" />
-
+            tools:text="@tools:sample/first_names" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
