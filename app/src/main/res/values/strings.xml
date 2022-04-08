@@ -10,4 +10,23 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="signInBtnStr">Sign In</string>
+
+    //charity home page strings
+    <string name="charityNameStr">*charity name</string>
+    <string name="makeRequestsStr">Create a New Request</string>
+    <string name="viewRequestsStr">View and Edit Past Requests</string>
+    <string name="updateAbtUsStr">Update About Us Page</string>
+
+    //about us view page strings
+    <string name="mottoStr">*motto</string>
+    <string name="emailStr">*email</string>
+    <string name="addressStr">*address</string>
+    <string name="phoneNumberStr">*phonenumber</string>
+
+    //about us edit page strings
+    <string name="editMottoHint">Enter a motto or brief description</string>
+    <string name="editEmailHInt">Enter an email</string>
+    <string name="editPhoneHint">Enter a phone number</string>
+    <string name="editAddressHint">Enter an address</string>
+
 </resources>
