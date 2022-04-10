@@ -15,7 +15,9 @@
     <string name="NameLabelStr">Name of item</string>
     <string name="EnterNameHintStr">Enter name of item:</string>
     <string name="CategoryLabelStr">Category</string>
-
+    <string name="continueCharity">Continue to Charity</string>
+    <string name="continueIndiv">Continue to Individual</string>
+    <string name="adminActivityWelcomeMSG">Welcome INSERT CHARITY</string>
 
     <string-array name="categories">
         <item>Smaller toys/games (e.g. legos, jenga, RC cars)</item>
