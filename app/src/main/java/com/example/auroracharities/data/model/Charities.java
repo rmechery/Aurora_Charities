@@ -1,7 +1,12 @@
 package com.example.auroracharities.data.model;
+import com.example.auroracharities.R;
+import com.google.firebase.firestore.GeoPoint;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Charities {
-    private String addressGeopoint;
+    private GeoPoint addressGeopoint;
     private String addressString;
     private String email;
     private String hoursBegin;
@@ -11,28 +16,18 @@ public class Charities {
     private String title;
     private int image;
 
-    public Charities(String addressGeopoint, String addressString, String email, String hoursBegin, String hoursEnd, String motto, String phone) {
-        this.addressGeopoint = addressGeopoint;
-        this.addressString = addressString;
-        this.email = email;
-        this.hoursBegin = hoursBegin;
-        this.hoursEnd = hoursEnd;
-        this.motto = motto;
-        this.phone = phone;
-        this.title = null;
-        this.image = 0;
+    public Charities(){
+//        this.addressGeopoint = addressGeopoint;
+//        this.addressString = "22 Bridle Path";
+//        this.email = "ryanmechery@gmail.com";
+//        this.hoursBegin = "9:30";
+//        this.hoursEnd = "10:30";
+//        this.motto = "beans are very nutritious";
+//        this.phone = "(774) 633-1387";
+//        this.title = "LKJSFLSKDJFLKSDJF";
+          this.image = R.drawable.a4g_logo_background;
     }
 
-//    public Charities(String title, int image) {
-//        this.title = title;
-//        this.image = image;
-//    }
-
-    public Charities(String title, String motto, int image) {
-        this.title = title;
-        this.motto = motto;
-        this.image = image;
-    }
 
     public String getTitle() {
         return title;
@@ -50,11 +45,11 @@ public class Charities {
         this.image = image;
     }
 
-    public String getAddressGeopoint() {
+    public GeoPoint getAddressGeopoint() {
         return addressGeopoint;
     }
 
-    public void setAddressGeopoint(String AddressGeopoint) {
+    public void setAddressGeopoint(GeoPoint AddressGeopoint) {
         this.addressGeopoint = addressGeopoint;
     }
 
@@ -104,5 +99,10 @@ public class Charities {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String toString(){
+        return title+" " +motto;
     }
 }
