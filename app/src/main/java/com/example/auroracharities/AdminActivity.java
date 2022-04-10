@@ -25,6 +25,4 @@ public class AdminActivity extends AppCompatActivity {
         TextView welcomeMSG = (TextView) findViewById(R.id.welcomeMSG);
         welcomeMSG.setText("Welcome, " + charity + " admin.");
     }
-
-
 }

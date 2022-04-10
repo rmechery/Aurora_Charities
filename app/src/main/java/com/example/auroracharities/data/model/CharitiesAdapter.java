@@ -34,8 +34,9 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
 
     @Override
     protected void onBindViewHolder(@NonNull CharitiesAdapterVH holder, int position, @NonNull Charities model) {
-        //Log.v("CharitiesAdapter", model.getTitle());
+        Log.v("CharitiesAdapter", model.getTitle());
         holder.title.setText(model.getTitle());
+
 
         holder.motto.setText(model.getMotto());
 
