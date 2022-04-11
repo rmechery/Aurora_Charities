@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(MainActivity.this, AddRequest.class));
+        startActivity(new Intent(MainActivity.this, Homescreen.class));
+        
         //setContentView(R.layout.activity_add_request);
     }
 
