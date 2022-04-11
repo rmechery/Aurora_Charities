@@ -49,5 +49,5 @@
     <string name="editPhoneHint">Enter a phone number</string>
     <string name="editAddressHint">Enter an address</string>
 
-
+    <string name="loginCharity">I dunno</string>
 </resources>
