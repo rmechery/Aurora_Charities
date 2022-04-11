@@ -21,6 +21,7 @@
     <string name="DescriptionStr">Short Description:</string>
     <string name="continueCharity">Continue as Charity</string>
     <string name="continueIndiv">Continue as Individual</string>
+
     <string name="adminActivityWelcomeMSG">Welcome INSERT CHARITY</string>
 
     <string-array name="categories">
@@ -51,6 +52,5 @@
 
     //actvity_login.xml
     <string name="loginCharity">Charity Login</string>
-
 
 </resources>

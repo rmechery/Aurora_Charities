@@ -14,7 +14,8 @@
         <entry key="app/src/main/res/layout/activity_add_request.xml" value="0.307616838485372" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.27873992919921875" />
         <entry key="app/src/main/res/layout/activity_homescreen.xml" value="0.10099029541015629" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2157960679796006" />
+
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33577287462022565" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1304977416992188" />
         <entry key="app/src/main/res/layout/activity_public_main.xml" value="0.26943673422928804" />
         <entry key="app/src/main/res/layout/charity_home.xml" value="0.12740487387772553" />
