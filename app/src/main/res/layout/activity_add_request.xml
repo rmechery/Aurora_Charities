@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#100F0F"
-    tools:context=".AddRequest">
+    tools:context=".AddRequestActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#252525"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -38,7 +40,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/Name"
+            android:id="@+id/addRequest_NameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -77,20 +79,20 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/addRequest_typeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:background="#252525"
             android:ems="10"
-            android:hint="@string/SizeStr"
+            android:hint="@string/TagTypeStr"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:textColor="#8A8383"
             android:textColorHint="#8A8383" />
 
         <EditText
-            android:id="@+id/Description"
+            android:id="@+id/add_Request_descriptionEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -101,6 +103,14 @@
             android:minHeight="48dp"
             android:textColor="#8A8383"
             android:textColorHint="#8A8383" />
+
+        <Button
+            android:id="@+id/addRequest_SubmitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="@string/addRequest_SubmitButton"
+            android:visibility="visible" />
 
     </LinearLayout>
 

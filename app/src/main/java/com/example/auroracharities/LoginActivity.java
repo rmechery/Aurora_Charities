@@ -22,6 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Locale;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "LoginActivity";
     // [START declare_auth]
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             db.collection("users")
-                                    .whereEqualTo(FieldPath.documentId(), email)
+                                    .whereEqualTo(FieldPath.documentId(), email.toLowerCase())
                                     .whereEqualTo("type", "charityAdmin")
                                     .limit(1)
                                     .get()
@@ -71,8 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             if(task2.getResult().getDocuments().size() > 0) {
                                                 String charity = task2.getResult().getDocuments().get(0).getData().get("charity").toString();
                                                 Log.v(TAG, charity);
-                                                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                                                intent.putExtra("charity", charity);
+                                                Intent intent = new Intent(LoginActivity.this, CharityHomeActivity.class);
+                                                //intent.putExtra("charity", charity);
                                                 startActivity(intent);
                                             }
                                             else{

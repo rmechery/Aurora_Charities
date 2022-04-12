@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class AdminActivity extends AppCompatActivity {
     private String charity;
     private static final String TAG = "AdminActivity";
@@ -19,11 +17,11 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_charity_home);
         charity = getIntent().getStringExtra("charity");
         Log.v(TAG, charity);
-        TextView welcomeMSG = (TextView) findViewById(R.id.welcomeMSG);
-        welcomeMSG.setText("Welcome, " + charity + " admin.");
+        TextView welcomeMSG = (TextView) findViewById(R.id.welcomeTextCharityHome);
+        welcomeMSG.setText(charity + " Admin Page");
     }
 
 

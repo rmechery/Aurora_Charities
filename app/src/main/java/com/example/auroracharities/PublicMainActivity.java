@@ -2,6 +2,7 @@ package com.example.auroracharities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PublicMain extends AppCompatActivity {
+public class PublicMainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
@@ -77,6 +78,7 @@ public class PublicMain extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        
 
     }
 
