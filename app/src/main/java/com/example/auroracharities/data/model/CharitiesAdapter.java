@@ -1,23 +1,26 @@
 package com.example.auroracharities.data.model;
 
-
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.auroracharities.CharityHomeActivity;
+import com.example.auroracharities.PublicMainActivity;
 import com.example.auroracharities.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, CharitiesAdapter.CharitiesAdapterVH> {
+public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, CharitiesAdapter.CharitiesAdapterVH>{
 
     public CharitiesAdapter(
             @NonNull FirestoreRecyclerOptions<Charities> options)
@@ -41,7 +44,6 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
 
         holder.image.setBackgroundResource(R.drawable.a4g_logo_background);
     }
-
 
 
     @NonNull
