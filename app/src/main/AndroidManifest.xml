@@ -11,7 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AuroraCharities">
-
+        <activity
+            android:name=".NavigationBarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditAboutusPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityEditAboutusPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditPastRequestsActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -33,7 +44,8 @@
         <activity
             android:name=".AdminActivity"
             android:exported="false" />
-        <activity android:name=".MapsMarkerActivity"
+        <activity
+            android:name=".MapsMarkerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
