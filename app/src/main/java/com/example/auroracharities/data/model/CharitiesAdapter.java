@@ -1,10 +1,8 @@
 package com.example.auroracharities.data.model;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,31 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.module.AppGlideModule;
-import com.bumptech.glide.util.GlideSuppliers;
-import com.example.auroracharities.CharityHomeActivity;
-import com.example.auroracharities.MainActivity;
-import com.example.auroracharities.PublicMainActivity;
 import com.example.auroracharities.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, CharitiesAdapter.CharitiesAdapterVH> {
 
@@ -85,10 +70,9 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
 
         holder.motto.setText(model.getMotto());
 
-        holder.image.setBackgroundResource(R.drawable.a4g_logo_background);
+        holder.image.setBackgroundColor(Color.WHITE);
 
         new DownloadImageFromInternet(holder.image).execute(model.getLogo());
-
     }
 
     @NonNull

@@ -1,6 +1,5 @@
 package com.example.auroracharities.data.model;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class Request {
