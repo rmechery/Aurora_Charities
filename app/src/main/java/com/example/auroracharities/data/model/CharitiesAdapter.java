@@ -18,9 +18,12 @@ import com.example.auroracharities.PublicMainActivity;
 import com.example.auroracharities.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, CharitiesAdapter.CharitiesAdapterVH>{
+
+    private OnItemClickListener listener;
 
     public CharitiesAdapter(
             @NonNull FirestoreRecyclerOptions<Charities> options)
@@ -45,7 +48,6 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
         holder.image.setBackgroundResource(R.drawable.a4g_logo_background);
     }
 
-
     @NonNull
     @Override
     public CharitiesAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,6 +67,25 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
             image = itemView.findViewById(R.id.image);
             motto = itemView.findViewById(R.id.motto);
             cardView = itemView.findViewById(R.id.carView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getLayoutPosition();
+                    if(position != RecyclerView.NO_POSITION && listener != null){
+                        listener.onItemClick(getSnapshots().getSnapshot(position),position);
+                    }
+                }
+            });
         }
+
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 }
