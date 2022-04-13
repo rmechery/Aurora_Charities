@@ -9,17 +9,16 @@
         <entry key="app/src/main/res/drawable/ic_a4g_logo__svg_.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.11640625" />
-        <entry key="app/src/main/res/layout/aboutus_charityview.xml" value="0.46267861655350684" />
-        <entry key="app/src/main/res/layout/aboutus_view.xml" value="0.2805649690925693" />
-        <entry key="app/src/main/res/layout/activity_add_request.xml" value="0.4856046065259117" />
-        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.27873992919921875" />
-        <entry key="app/src/main/res/layout/activity_charity_home.xml" value="0.1996964388191317" />
-        <entry key="app/src/main/res/layout/activity_homescreen.xml" value="0.10099029541015629" />
+        <entry key="app/src/main/res/layout/activity_homescreen.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/aboutus_charityview.xml" value="0.28640906615097833" />
+        <entry key="app/src/main/res/layout/aboutus_edit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33577287462022565" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1304977416992188" />
-        <entry key="app/src/main/res/layout/activity_public_main.xml" value="0.26943673422928804" />
-        <entry key="app/src/main/res/layout/charity_home.xml" value="0.18883675864335045" />
-        <entry key="app/src/main/res/layout/recyclerview_adapter_layout.xml" value="0.2217783630935654" />
+        <entry key="app/src/main/res/layout/activity_public_main.xml" value="0.12740487387772553" />
+        <entry key="app/src/main/res/layout/recyclerview_adapter_layout.xml" value="0.1489944458007812" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22093353271484378" />
+        <entry key="app/src/main/res/layout/charity_home.xml" value="0.25178375244140627" />
+        <entry key="app/src/main/res/layout/recyclerview_adapter_layout.xml" value="0.21770833333333334" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/a4g_logo.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
