@@ -1,8 +1,10 @@
 package com.example.auroracharities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.example.auroracharities.data.model.CharitiesAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,7 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PublicMainActivity extends AppCompatActivity {
+public class PublicMainActivity extends AppCompatActivity implements CharitiesAdapter.OnItemClickListener{
 
     private RecyclerView recyclerView;
 
@@ -44,7 +47,8 @@ public class PublicMainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map charityData = document.getData();
-                                //Log.d(TAG, document.getId() + " => " + charityData);
+                                //Log.d(TAG, charityData+ " => " + charityData.get("logo"));
+                                Log.d(TAG, charityData.toString());
                                 String motto = (String)(charityData.get("motto"));
                                 //charitiesList.add(new Charities("Title", motto, R.drawable.gfgimage));
                                 Log.d(TAG, charitiesList.toString());
@@ -65,7 +69,6 @@ public class PublicMainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-
         Query query = FirebaseFirestore.getInstance()
                 .collection("Charities");
 
@@ -78,8 +81,17 @@ public class PublicMainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        
-
+        adapter.setOnItemClickListener(new CharitiesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Charities charity = documentSnapshot.toObject(Charities.class);
+                String id = documentSnapshot.getId();
+                Toast.makeText(PublicMainActivity.this, "Position: " + position + " ID: " + id, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(PublicMainActivity.this, IndividualCharityPageActivity.class);
+                i.putExtra("charityDocID",id);
+                startActivity(i);
+            }
+        });
     }
 
     // Function to tell the app to start getting
@@ -95,7 +107,11 @@ public class PublicMainActivity extends AppCompatActivity {
     @Override protected void onStop()
     {
         super.onStop();
-        adapter.stopListening();
+        //adapter.stopListening();
     }
 
+    @Override
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+
+    }
 }

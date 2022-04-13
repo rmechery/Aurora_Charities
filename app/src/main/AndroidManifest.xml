@@ -11,21 +11,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AuroraCharities">
+
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDHc5HdbDME3BVbSvHn8Zl5yJd_D8Kimqs" />
+
+        <activity
+            android:name=".IndividualCharityPageActivity"
+            android:exported="false" />
         <activity
             android:name=".AdminActivity"
+            android:exported="false" />
+        <activity android:name=".MapsMarkerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".PublicMainActivity"/>
-        <activity android:name=".HomeScreenActivity"/>
-        <activity android:name=".AddRequestActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".PublicMainActivity" />
+        <activity android:name=".HomeScreenActivity" />
+        <activity android:name=".AddRequestActivity" />
         <activity android:name=".CharityHomeActivity" />
     </application>
 
