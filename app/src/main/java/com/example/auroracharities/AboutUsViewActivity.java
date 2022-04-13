@@ -1,3 +1,5 @@
+package com.example.auroracharities;
+
 import android.os.Bundle;
 import android.os.PersistableBundle;
 

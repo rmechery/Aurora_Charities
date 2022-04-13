@@ -1,5 +1,6 @@
 package com.example.auroracharities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,7 +47,8 @@ public class PublicMainActivity extends AppCompatActivity implements CharitiesAd
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map charityData = document.getData();
-                                //Log.d(TAG, document.getId() + " => " + charityData);
+                                //Log.d(TAG, charityData+ " => " + charityData.get("logo"));
+                                Log.d(TAG, charityData.toString());
                                 String motto = (String)(charityData.get("motto"));
                                 //charitiesList.add(new Charities("Title", motto, R.drawable.gfgimage));
                                 Log.d(TAG, charitiesList.toString());
@@ -67,7 +69,6 @@ public class PublicMainActivity extends AppCompatActivity implements CharitiesAd
 
         recyclerView = findViewById(R.id.recyclerView);
 
-
         Query query = FirebaseFirestore.getInstance()
                 .collection("Charities");
 
@@ -86,6 +87,9 @@ public class PublicMainActivity extends AppCompatActivity implements CharitiesAd
                 Charities charity = documentSnapshot.toObject(Charities.class);
                 String id = documentSnapshot.getId();
                 Toast.makeText(PublicMainActivity.this, "Position: " + position + " ID: " + id, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(PublicMainActivity.this, IndividualCharityPageActivity.class);
+                i.putExtra("charityDocID",id);
+                startActivity(i);
             }
         });
     }
@@ -103,7 +107,7 @@ public class PublicMainActivity extends AppCompatActivity implements CharitiesAd
     @Override protected void onStop()
     {
         super.onStop();
-        adapter.stopListening();
+        //adapter.stopListening();
     }
 
     @Override

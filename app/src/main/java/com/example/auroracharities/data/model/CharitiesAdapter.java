@@ -1,6 +1,11 @@
 package com.example.auroracharities.data.model;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +18,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.util.GlideSuppliers;
 import com.example.auroracharities.CharityHomeActivity;
+import com.example.auroracharities.MainActivity;
 import com.example.auroracharities.PublicMainActivity;
 import com.example.auroracharities.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -21,7 +33,12 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, CharitiesAdapter.CharitiesAdapterVH>{
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, CharitiesAdapter.CharitiesAdapterVH> {
 
     private OnItemClickListener listener;
 
@@ -38,6 +55,29 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
         Log.wtf("AHHH", "I dunno.");
     }
 
+    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
+        ImageView imageView;
+        public DownloadImageFromInternet(ImageView imageView) {
+            this.imageView=imageView;
+            //Toast.makeText(getApplicationContext(), "Please wait, it may take a few minute...",Toast.LENGTH_SHORT).show();
+        }
+        protected Bitmap doInBackground(String... urls) {
+            String imageURL=urls[0];
+            Bitmap bimage=null;
+            try {
+                InputStream in=new java.net.URL(imageURL).openStream();
+                bimage=BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error Message", e.getMessage());
+                e.printStackTrace();
+            }
+            return bimage;
+        }
+        protected void onPostExecute(Bitmap result) {
+            imageView.setImageBitmap(result);
+        }
+    }
+
     @Override
     protected void onBindViewHolder(@NonNull CharitiesAdapterVH holder, int position, @NonNull Charities model) {
         //Log.v("CharitiesAdapter", model.getTitle());
@@ -46,6 +86,9 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
         holder.motto.setText(model.getMotto());
 
         holder.image.setBackgroundResource(R.drawable.a4g_logo_background);
+
+        new DownloadImageFromInternet(holder.image).execute(model.getLogo());
+
     }
 
     @NonNull
