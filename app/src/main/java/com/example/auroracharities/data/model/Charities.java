@@ -14,7 +14,17 @@ public class Charities {
     private String motto;
     private String phone;
     private String title;
+    private String logo;
     private int image;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
 
     public Charities(){
 //        this.addressGeopoint = addressGeopoint;
