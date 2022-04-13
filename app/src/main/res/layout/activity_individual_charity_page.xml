@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteY="-64dp">
 
         <TextView
-            android:id="@+id/charityName"
+            android:id="@+id/ind_charityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -28,20 +28,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/charityLogo"
+            android:id="@+id/ind_charityLogo"
             android:layout_width="185dp"
             android:layout_height="227dp"
             android:layout_marginStart="75dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="75dp"
-            android:background="@color/purple_500"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/charityName"
+            app:layout_constraintTop_toBottomOf="@+id/ind_charityName"
             app:srcCompat="@drawable/ic_a4g_logo__svg_" />
 
         <TextView
-            android:id="@+id/mottoText"
+            android:id="@+id/ind_mottoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
@@ -52,10 +52,10 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/charityLogo" />
+            app:layout_constraintTop_toBottomOf="@+id/ind_charityLogo" />
 
         <TextView
-            android:id="@+id/emailText"
+            android:id="@+id/ind_emailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
@@ -66,10 +66,10 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mottoText" />
+            app:layout_constraintTop_toBottomOf="@+id/ind_mottoText" />
 
         <TextView
-            android:id="@+id/phoneText"
+            android:id="@+id/ind_phoneText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
@@ -79,10 +79,10 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailText" />
+            app:layout_constraintTop_toBottomOf="@+id/ind_emailText" />
 
         <TextView
-            android:id="@+id/addressText"
+            android:id="@+id/ind_addressText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
@@ -92,7 +92,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phoneText" />
+            app:layout_constraintTop_toBottomOf="@+id/ind_phoneText" />
 
         <ImageButton
             android:id="@+id/backButton2"
