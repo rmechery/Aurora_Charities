@@ -70,4 +70,5 @@
 
     <string name="loginCharity">I dunno</string>
     <string name="addRequest_SubmitButton">Submit</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
