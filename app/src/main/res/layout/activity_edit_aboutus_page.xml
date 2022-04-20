@@ -10,6 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/backButton3"
+            android:layout_width="60dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="backButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
+
         <TextView
             android:id="@+id/charityViewName"
             android:layout_width="wrap_content"
@@ -17,6 +28,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
+            android:text="@string/underConstructionStr"
             android:text="@string/charityNameStr"
             android:textColor="#024A97"
             android:textSize="48sp"
@@ -101,6 +113,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editPhone"
             android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/aboutUsSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addRequest_SubmitButton"
+            app:layout_constraintTop_toBottomOf="@+id/editAddress"
+            tools:layout_editor_absoluteX="151dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
