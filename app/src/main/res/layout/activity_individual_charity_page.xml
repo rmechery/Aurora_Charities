@@ -21,6 +21,7 @@
             android:layout_marginEnd="50dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/charityNameStr"
+            android:textColor="#024A97"
             android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -94,15 +95,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ind_phoneText" />
 
-        <ImageButton
-            android:id="@+id/backButton2"
-            android:layout_width="66dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="15dp"
-            android:contentDescription="Back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="?attr/actionModeCloseDrawable" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
