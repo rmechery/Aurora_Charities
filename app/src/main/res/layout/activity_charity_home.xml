@@ -18,11 +18,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/charityNameStr"
-            android:textColor="@color/purple_500"
+            android:textColor="#024A97"
             android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +34,8 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="200dp"
             android:layout_marginEnd="50dp"
-            android:fontFamily="sans-serif-condensed"
+            android:backgroundTint="#024A97"
+            android:fontFamily="sans-serif"
             android:onClick="onClick"
             android:text="@string/makeRequestsStr"
             android:textSize="24sp"
@@ -48,7 +50,8 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="50dp"
-            android:fontFamily="sans-serif-condensed"
+            android:backgroundTint="#024A97"
+            android:fontFamily="sans-serif"
             android:onClick="onClick"
             android:text="@string/viewRequestsStr"
             android:textSize="24sp"
@@ -63,7 +66,8 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="50dp"
-            android:fontFamily="sans-serif-condensed"
+            android:backgroundTint="#024A97"
+            android:fontFamily="sans-serif"
             android:onClick="onClick"
             android:text="@string/updateAbtUsStr"
             android:textSize="24sp"
@@ -81,5 +85,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="?attr/actionModeCloseDrawable" />
+
+        <Button
+            android:id="@+id/signOutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:onClick="onClick"
+            android:text="@string/signOutButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

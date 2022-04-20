@@ -4,114 +4,150 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#100F0F"
+    android:background="@android:color/white"
     tools:context=".AddRequestActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#252525"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/NewRequestLabel"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_marginTop="65dp"
+        android:background="@color/white"
+        android:text="@string/AddRequestPage"
+        android:textAlignment="center"
+        android:textColor="#024A97"
+        android:textSize="50sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/NameLabel"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="35dp"
+        android:background="#024A97"
+        android:text="@string/NameLabelStr"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/NewRequestLabel" />
 
-        <TextView
-            android:id="@+id/NewRequestLabel"
-            android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:background="#252525"
-            android:text="@string/AddRequestPage"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="34sp" />
+    <EditText
+        android:id="@+id/addRequest_NameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:autofillHints=""
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/EnterNameHintStr"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NameLabel" />
 
-        <TextView
-            android:id="@+id/NameLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#6C00F8"
-            android:text="@string/NameLabelStr"
-            android:textAlignment="textStart"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
+    <TextView
+        android:id="@+id/CategoryLabel"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="35dp"
+        android:background="#024A97"
+        android:text="@string/CategoryLabelStr"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addRequest_NameEditText" />
 
-        <EditText
-            android:id="@+id/addRequest_NameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:background="#252525"
-            android:ems="10"
-            android:hint="@string/EnterNameHintStr"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColor="#8A8383"
-            android:textColorHint="#8A8383" />
+    <Spinner
+        android:id="@+id/spinner_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CategoryLabel"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/CategoryLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#6C00F8"
-            android:text="@string/CategoryLabelStr"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
+    <TextView
+        android:id="@+id/TagsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="35dp"
+        android:background="#024A97"
+        android:text="@string/TagLabelStr"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_categories" />
 
-        <Spinner
-            android:id="@+id/spinner_categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+    <EditText
+        android:id="@+id/addRequest_typeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:autofillHints=""
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/TagTypeStr"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
 
-        <TextView
-            android:id="@+id/TagsLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#6C00F8"
-            android:text="@string/TagLabelStr"
-            android:textAlignment="textStart"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
+    <EditText
+        android:id="@+id/add_Request_descriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:autofillHints=""
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/DescriptionStr"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addRequest_typeEditText" />
 
-        <EditText
-            android:id="@+id/addRequest_typeEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:background="#252525"
-            android:ems="10"
-            android:hint="@string/TagTypeStr"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColor="#8A8383"
-            android:textColorHint="#8A8383" />
-
-        <EditText
-            android:id="@+id/add_Request_descriptionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:background="#252525"
-            android:ems="10"
-            android:hint="@string/DescriptionStr"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColor="#8A8383"
-            android:textColorHint="#8A8383" />
-
-        <Button
-            android:id="@+id/addRequest_SubmitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="@string/addRequest_SubmitButton"
-            android:visibility="visible" />
-
-    </LinearLayout>
-
+    <Button
+        android:id="@+id/addRequest_SubmitButton"
+        android:layout_width="298dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="#024A97"
+        android:onClick="onClick"
+        android:text="@string/addRequest_SubmitButton"
+        android:textSize="28sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_Request_descriptionEditText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@
         android:layout_width="493dp"
         android:layout_height="125dp"
         android:layout_marginTop="25dp"
-        android:background="#6C00F8"
+        android:backgroundTint="#024A97"
         android:onClick="onClick"
         android:shadowRadius="5"
         android:text="@string/continueIndiv"
@@ -31,15 +31,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_a4g_logo__svg_"
-        />
+        app:srcCompat="@drawable/ic_a4g_logo__svg_" />
 
     <Button
         android:id="@+id/continueToCharity"
         android:layout_width="493dp"
         android:layout_height="125dp"
         android:layout_marginTop="15dp"
-        android:background="#6C00F8"
+        android:backgroundTint="#024A97"
         android:onClick="onClick"
         android:shadowRadius="5"
         android:text="@string/continueCharity"
