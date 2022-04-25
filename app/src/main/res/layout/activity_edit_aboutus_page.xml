@@ -28,7 +28,6 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
-            android:text="@string/underConstructionStr"
             android:text="@string/charityNameStr"
             android:textColor="#024A97"
             android:textSize="48sp"
