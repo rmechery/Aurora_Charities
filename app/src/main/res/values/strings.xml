@@ -50,7 +50,6 @@
     <string name="editAddressHint">Enter an address</string>
 
     <string name="loginCharity">Charity Login</string>
-    <string name="loginCharity">Charity Login Page</string>
     <string name="addRequest_SubmitButton">Submit</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="underConstructionStr">Under Construction</string>

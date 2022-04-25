@@ -156,4 +156,14 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                 break;
         }
     }
+
+//    public void tagSearchSetup(){
+//        String products[] = {"Dell Inspiron", "HTC One X", "HTC Wildfire S", "HTC Sense", "HTC Sensation XE",
+//                "iPhone 4S", "Samsung Galaxy Note 800",
+//                "Samsung Galaxy S3", "MacBook Air", "Mac Mini", "MacBook Pro"};
+//        myListView = (ListView) findViewById(R.id.editlist_view);
+//        inputSearch = (EditText) findViewById(R.id.itemSearch);
+//        myAdapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
+//        myListView.setAdapter(myAdapter);
+//    }
 }
