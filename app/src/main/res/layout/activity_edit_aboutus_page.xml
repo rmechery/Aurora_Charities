@@ -28,7 +28,9 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
+            android:text="@string/underConstructionStr"
             android:text="@string/charityNameStr"
+            android:textColor="#024A97"
             android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +43,7 @@
             android:layout_marginStart="75dp"
             android:layout_marginTop="45dp"
             android:layout_marginEnd="75dp"
-            android:background="@color/purple_500"
+            android:background="#024A97"
             android:backgroundTintMode="add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +59,9 @@
             android:layout_marginEnd="80dp"
             android:hint="@string/editMottoHint"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -71,7 +75,9 @@
             android:layout_marginEnd="80dp"
             android:hint="@string/editEmailHInt"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editMotto" />
@@ -85,7 +91,9 @@
             android:layout_marginEnd="80dp"
             android:hint="@string/editPhoneHint"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editEmail" />
@@ -100,9 +108,19 @@
             android:hint="@string/editAddressHint"
             android:minHeight="48dp"
             android:textColorHint="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPhone" />
+            app:layout_constraintTop_toBottomOf="@+id/editPhone"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/aboutUsSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addRequest_SubmitButton"
+            app:layout_constraintTop_toBottomOf="@+id/editAddress"
+            tools:layout_editor_absoluteX="151dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

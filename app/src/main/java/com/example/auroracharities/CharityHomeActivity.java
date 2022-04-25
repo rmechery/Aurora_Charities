@@ -61,16 +61,24 @@ public class CharityHomeActivity extends AppCompatActivity implements View.OnCli
         getCharity();
     }
 
+    public void signOut(){
+        FirebaseAuth.getInstance().signOut();
+    }
+
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.newRequestsButton:
                 startActivity(new Intent(CharityHomeActivity.this, AddRequestActivity.class));
                 break;
             case R.id.viewRequests:
-                startActivity(new Intent(CharityHomeActivity.this, AddRequestActivity.class));
+                startActivity(new Intent(CharityHomeActivity.this, EditPastRequestsActivity.class));
                 break;
             case R.id.updateAboutUsButton:
-                startActivity(new Intent(CharityHomeActivity.this, AddRequestActivity.class));
+                startActivity(new Intent(CharityHomeActivity.this, EditAboutusPageActivity.class));
+                break;
+            case R.id.signOutButton:
+                signOut();
+                startActivity(new Intent(CharityHomeActivity.this, LoginActivity.class));
                 break;
         }
     }

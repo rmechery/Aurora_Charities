@@ -1,8 +1,5 @@
 package com.example.auroracharities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -10,6 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,7 +24,6 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     String charityDocID;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "IndividualCharityPage";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

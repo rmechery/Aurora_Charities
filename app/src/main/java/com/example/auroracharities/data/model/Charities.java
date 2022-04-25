@@ -1,9 +1,7 @@
 package com.example.auroracharities.data.model;
+
 import com.example.auroracharities.R;
 import com.google.firebase.firestore.GeoPoint;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Charities {
     private GeoPoint addressGeopoint;
