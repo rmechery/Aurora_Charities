@@ -75,23 +75,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewRequests" />
 
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="66dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="15dp"
-            android:contentDescription="backButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="?attr/actionModeCloseDrawable" />
-
         <Button
             android:id="@+id/signOutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
+            android:layout_width="150dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="25dp"
             android:layout_marginBottom="15dp"
+            android:backgroundTint="#024A97"
             android:onClick="onClick"
             android:text="@string/signOutButton"
             app:layout_constraintBottom_toBottomOf="parent"
