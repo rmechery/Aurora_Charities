@@ -5,7 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:padding="16dp"
     tools:context=".AddRequestActivity">
+
+    <Button
+        android:id="@+id/sizeTagButton"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#E91E63"
+        android:text="@string/sizeTagStr"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/ageTagButton"
+        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
+
+    <EditText
+        android:id="@+id/addRequest_NameEditText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:autofillHints=""
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/ItemDescriptionStr"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CategoryLabel" />
 
     <TextView
         android:id="@+id/NewRequestLabel"
@@ -60,10 +93,10 @@
         android:layout_width="match_parent"
         android:layout_height="45sp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="35dp"
         android:background="#024A97"
-        android:text="@string/CategoryLabelStr"
+        android:text="@string/DescriptionStr"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -71,24 +104,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addRequest_NameEditText" />
 
-    <Spinner
-        android:id="@+id/spinner_categories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CategoryLabel"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <TextView
         android:id="@+id/TagsLabel"
         android:layout_width="match_parent"
         android:layout_height="45sp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="35dp"
         android:background="#024A97"
         android:text="@string/TagLabelStr"
@@ -97,51 +118,13 @@
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_categories" />
-
-    <EditText
-        android:id="@+id/addRequest_typeEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:autofillHints=""
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="@string/TagTypeStr"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
-
-    <EditText
-        android:id="@+id/add_Request_descriptionEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:autofillHints=""
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="@string/DescriptionStr"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addRequest_typeEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/addRequest_NameEditText2" />
 
     <Button
         android:id="@+id/addRequest_SubmitButton"
-        android:layout_width="298dp"
-        android:layout_height="107dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="300dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="220dp"
         android:backgroundTint="#024A97"
         android:onClick="onClick"
         android:text="@string/addRequest_SubmitButton"
@@ -149,18 +132,18 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_Request_descriptionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
 
-        <!-- Editext for Search -->
-    <!--            android:inputType="textVisibleword"/>-->
-
-        <!-- List View -->
-
-    <ListView
-            android:id="@+id/editlist_view"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-
+    <Button
+        android:id="@+id/ageTagButton"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#117A15"
+        android:text="@string/ageTagStr"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

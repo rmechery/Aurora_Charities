@@ -1,20 +1,18 @@
 package com.example.auroracharities.data.model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Request {
-    private String name;
-    private String category;
-    private Map<String, Object> tag;
-
-    public Request() {
+    public Request(){
 
     }
 
-    public Request(String name, String category, Map<String, Object> tag) {
+    public Request(String name, String description, ArrayList<String> ageTag, ArrayList<String> sizeTag) {
         this.name = name;
-        this.category = category;
-        this.tag = tag;
+        this.description = description;
+        this.ageTag = ageTag;
+        this.sizeTag = sizeTag;
     }
 
     public String getName() {
@@ -25,28 +23,32 @@ public class Request {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Map<String, Object> getTag() {
-        return tag;
+    public ArrayList<String> getAgeTag() {
+        return ageTag;
     }
 
-    public void setTag(Map<String, Object> tag) {
-        this.tag = tag;
+    public void setAgeTag(ArrayList<String> ageTag) {
+        this.ageTag = ageTag;
     }
 
-    @Override
-    public String toString() {
-        return "Request{" +
-                "name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", tag=" + tag +
-                '}';
+    public ArrayList<String> getSizeTag() {
+        return sizeTag;
     }
+
+    public void setSizeTag(ArrayList<String> sizeTag) {
+        this.sizeTag = sizeTag;
+    }
+
+    private String name;
+    private String description;
+    private ArrayList<String> ageTag;
+    private ArrayList<String> sizeTag;
 }
