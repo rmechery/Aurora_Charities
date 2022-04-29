@@ -8,6 +8,18 @@
     android:padding="16dp"
     tools:context=".AddRequestActivity">
 
+    <Button
+        android:id="@+id/sizeTagButton"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#E91E63"
+        android:text="@string/sizeTagStr"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/ageTagButton"
+        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
+
     <EditText
         android:id="@+id/addRequest_NameEditText2"
         android:layout_width="match_parent"
@@ -129,7 +141,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#117A15"
-        android:text="@string/ageTag"
+        android:text="@string/ageTagStr"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />

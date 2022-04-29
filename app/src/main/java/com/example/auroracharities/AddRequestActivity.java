@@ -30,9 +30,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AddRequestActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -48,11 +51,14 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
     private EditText tagTypeEditText;
     private EditText tagDescriptionEditText;
 
-    //private String[] sizeTagArr = {"deez Nuts", "gotti"};
     private ArrayList<String> itemsArray = new ArrayList<String>();
-    private List<String> ageTaglist;
+    private List<String> ageTaglist = new ArrayList<String>();
+    private List<String> sizeTagList = new ArrayList<String>();
+    private HashMap<String, ArrayList<String>> tagMap = new HashMap<>();
+    private HashMap<String, boolean[]> selectedItemsMap = new HashMap<>();
 
     private Button ageTagBtn;
+    private Button sizeTagBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +66,8 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_add_request);
         mAuth = FirebaseAuth.getInstance();
 
-//        nameEditText = (EditText)findViewById(R.id.addRequest_NameEditText);
-//        spinnerRequests =findViewById(R.id.spinner_categories);
-//        tagTypeEditText = (EditText)findViewById(R.id.addRequest_typeEditText);
-//        tagDescriptionEditText = (EditText)findViewById(R.id.add_Request_descriptionEditText);
+        nameEditText = (EditText)findViewById(R.id.addRequest_NameEditText);
+        tagDescriptionEditText = (EditText)findViewById(R.id.addRequest_NameEditText2);
 //
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -74,7 +78,15 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
             ageTagBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CreateAlertDialog(R.array.age, "lkjl");
+                    CreateAlertDialog(R.array.ageTagArr, "age");
+                }
+            });
+
+            sizeTagBtn = findViewById(R.id.sizeTagButton);
+            sizeTagBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CreateAlertDialog(R.array.sizeTagArr, "size");
                 }
             });
     }
@@ -119,30 +131,31 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
     }
 
     private void CreateAlertDialog(int id, String tagType) {
-        //ageTagList = new ArrayList<String>();
-        ArrayList<String> list = new ArrayList<String>();
+        if (!tagMap.containsKey(tagType)) tagMap.put(tagType,  new ArrayList<String>());
+        ArrayList<String> list = tagMap.get(tagType);
+
+        if (!selectedItemsMap.containsKey(tagType)) selectedItemsMap.put(tagType, new boolean[getResources().getStringArray(id).length]);
+        boolean[] selectedItems = selectedItemsMap.get(tagType);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select size");
-        builder.setMultiChoiceItems(id, null, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setCancelable(true);
+        builder.setTitle("Select " + tagType);
+        builder.setMultiChoiceItems(id, selectedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i, boolean b) {
                     String[] tagArr = getResources().getStringArray(id);
-                    Log.d(TAG,tagArr.toString());
+
+                    Log.d(TAG, Arrays.toString(selectedItems));
+                    selectedItems[i] = b;
+
                     if(b){
                         list.add(tagArr[i]);
                     } else if(list.contains(tagArr[i])){
                         list.remove(tagArr[i]);
                     }
-//                    switch(tagType){
-//                        case "age":
-//                            Log.d(TAG, "Added something");
-//                            break;
-//
-//                    }
             }
         });
-        builder.setPositiveButton("Show", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String data = "";
@@ -150,10 +163,11 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                     data = data + item;
                 }
                 Toast.makeText(AddRequestActivity.this, data, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, list.toString());
             }
         });
 
-        builder.create();
+        builder.create().setCanceledOnTouchOutside(true);
         builder.show();
     }
 
@@ -177,20 +191,17 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                 if(nameEditText.getText().toString().trim().equals("")){
                     Toast.makeText(this, "Please enter the Request Name.", Toast.LENGTH_SHORT).show();
                 }
-                else if(tagTypeEditText.getText().toString().trim().equals("")){
-                    Toast.makeText(this, "Please enter the Request Tag Type.", Toast.LENGTH_SHORT).show();
-                }
-                else if(tagDescriptionEditText.getText().toString().trim().equals("")){
-                    Toast.makeText(this, "Please enter the Request Tag Description.", Toast.LENGTH_SHORT).show();
-                }
+//                else if(tagTypeEditText.getText().toString().trim().equals("")){
+//                    Toast.makeText(this, "Please enter the Request Tag Type.", Toast.LENGTH_SHORT).show();
+//                }
+//                else if(tagDescriptionEditText.getText().toString().trim().equals("")){
+//                    Toast.makeText(this, "Please enter the Request Tag Description.", Toast.LENGTH_SHORT).show();
+//                }
                 else{
 
-                    Map<String, Object> tagMap = new HashMap<>();
-                    tagMap.put(tagTypeEditText.getText().toString(), tagDescriptionEditText.getText().toString());
-
                     Request requestObj = new Request(nameEditText.getText().toString(),
-                            spinnerRequests.getSelectedItem().toString(),
-                            tagMap);
+                            tagDescriptionEditText.getText().toString(),
+                            tagMap.get("age"), tagMap.get("size"));
 
                     Log.v(TAG, requestObj.toString());
                     db.collection("Charities").document(charity).collection("Requests")
@@ -209,8 +220,6 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                                     Log.w(TAG, "Error adding document", e);
                                 }
                             });
-
-
                 }
                 break;
         }

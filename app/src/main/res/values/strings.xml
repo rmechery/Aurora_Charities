@@ -58,10 +58,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    //tag button names
-    <string name="ageTag">Age</string>
+    <!-- Activity Add Request -->
+    <string name="ageTagStr">Age</string>
+    <string name="sizeTagStr">Size</string>
 
-    <string-array name="age">
+
+    <string-array name="ageTagArr">
         <item>Infant</item>
         <item>Kid (Ages 5+)</item>
         <item>Teenager</item>
@@ -70,5 +72,11 @@
         <item>Not beneficial for society</item>
         <item>Prehistoric</item>
         <item>Queen Elizabeth</item>
+    </string-array>
+
+    <string-array name="sizeTagArr">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
     </string-array>
 </resources>
