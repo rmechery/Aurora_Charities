@@ -18,6 +18,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import com.algolia.search.DefaultSearchClient;
+import com.algolia.search.SearchClient;
+
+import com.algolia.search.SearchConfig;
+import com.algolia.search.SearchIndex;
 import com.example.auroracharities.data.model.Request;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,8 +53,6 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
 
     private String charity;
     private EditText nameEditText;
-    private Spinner spinnerRequests;
-    private EditText tagTypeEditText;
     private EditText tagDescriptionEditText;
 
     private ArrayList<String> itemsArray = new ArrayList<String>();
@@ -68,11 +72,6 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
 
         nameEditText = (EditText)findViewById(R.id.addRequest_NameEditText);
         tagDescriptionEditText = (EditText)findViewById(R.id.addRequest_NameEditText2);
-//
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerRequests.setAdapter(adapter);
-//        spinnerRequests.setOnItemSelectedListener(this);
 
             ageTagBtn = findViewById(R.id.ageTagButton);
             ageTagBtn.setOnClickListener(new View.OnClickListener() {
@@ -194,12 +193,12 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
 //                else if(tagTypeEditText.getText().toString().trim().equals("")){
 //                    Toast.makeText(this, "Please enter the Request Tag Type.", Toast.LENGTH_SHORT).show();
 //                }
-//                else if(tagDescriptionEditText.getText().toString().trim().equals("")){
-//                    Toast.makeText(this, "Please enter the Request Tag Description.", Toast.LENGTH_SHORT).show();
-//                }
+                else if(tagDescriptionEditText.getText().toString().trim().equals("")){
+                    Toast.makeText(this, "Please enter the Request Tag Description.", Toast.LENGTH_SHORT).show();
+                }
                 else{
 
-                    Request requestObj = new Request(nameEditText.getText().toString(),
+                    Request requestObj = new Request(charity, nameEditText.getText().toString(),
                             tagDescriptionEditText.getText().toString(),
                             tagMap.get("age"), tagMap.get("size"));
 
@@ -210,6 +209,8 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+
+
                                     Toast.makeText(AddRequestActivity.this, "SUCCESS:" + requestObj.getName() + " added to the database.", Toast.LENGTH_LONG).show();
                                 }
                             })
@@ -225,13 +226,4 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         }
     }
 
-//    public void tagSearchSetup(){
-//        String products[] = {"Dell Inspiron", "HTC One X", "HTC Wildfire S", "HTC Sense", "HTC Sensation XE",
-//                "iPhone 4S", "Samsung Galaxy Note 800",
-//                "Samsung Galaxy S3", "MacBook Air", "Mac Mini", "MacBook Pro"};
-//        myListView = (ListView) findViewById(R.id.editlist_view);
-//        inputSearch = (EditText) findViewById(R.id.itemSearch);
-//        myAdapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
-//        myListView.setAdapter(myAdapter);
-//    }
 }
