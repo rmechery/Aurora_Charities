@@ -61,7 +61,7 @@
     <!-- Activity Add Request -->
     <string name="ageTagStr">Age</string>
     <string name="sizeTagStr">Size</string>
-
+    <string name="qualityTagStr">Quality</string>
     <string-array name="ageTagArr">
         <item>Infant</item>
         <item>Kid (Ages 5+)</item>

@@ -12,12 +12,13 @@
         android:id="@+id/sizeTagButton"
         android:layout_width="125dp"
         android:layout_height="65dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#E91E63"
         android:text="@string/sizeTagStr"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/ageTagButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
 
     <EditText
@@ -138,12 +139,27 @@
         android:id="@+id/ageTagButton"
         android:layout_width="125dp"
         android:layout_height="65dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#117A15"
         android:text="@string/ageTagStr"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/sizeTagButton"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
+
+    <Button
+        android:id="@+id/ageTagButton2"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="48dp"
+        android:backgroundTint="#7249A5"
+        android:text="@string/qualityTagStr"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toEndOf="@+id/sizeTagButton"
         app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
