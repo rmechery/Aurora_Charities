@@ -10,16 +10,15 @@
 
     <Button
         android:id="@+id/sizeTagButton"
-        android:layout_width="125dp"
+        android:layout_width="134dp"
         android:layout_height="65dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#E91E63"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="#7249A5"
         android:text="@string/sizeTagStr"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/ageTagButton3" />
 
     <EditText
         android:id="@+id/addRequest_NameEditText2"
@@ -125,7 +124,7 @@
         android:id="@+id/addRequest_SubmitButton"
         android:layout_width="300dp"
         android:layout_height="110dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="70dp"
         android:backgroundTint="#024A97"
         android:onClick="onClick"
         android:text="@string/addRequest_SubmitButton"
@@ -133,33 +132,49 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/sizeTagButton" />
 
     <Button
         android:id="@+id/ageTagButton"
-        android:layout_width="125dp"
+        android:layout_width="134dp"
         android:layout_height="65dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#117A15"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="#7249A5"
         android:text="@string/ageTagStr"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/sizeTagButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ageTagButton3" />
+
+    <Button
+        android:id="@+id/ageTagButton3"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="58dp"
+        android:backgroundTint="#7249A5"
+        android:text="@string/conditionTagStr"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
 
     <Button
         android:id="@+id/ageTagButton2"
-        android:layout_width="125dp"
+        android:layout_width="134dp"
         android:layout_height="65dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="58dp"
         android:backgroundTint="#7249A5"
         android:text="@string/qualityTagStr"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/sizeTagButton"
-        app:layout_constraintTop_toBottomOf="@+id/TagsLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/ageTagButton3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

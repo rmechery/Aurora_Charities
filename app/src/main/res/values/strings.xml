@@ -14,7 +14,7 @@
     <string name="AddRequestPage">New Request</string>
     <string name="NameLabelStr">Name of item</string>
     <string name="EnterNameHintStr">Enter name of item:</string>
-    <string name="ItemDescriptionStr">Describe the item (if desired):</string>
+    <string name="ItemDescriptionStr">Describe the item (keywords, sentences, etc):</string>
     <string name="TagLabelStr">Tags</string>
     <string name="CategoryDropDown">Categories</string>
     <string name="TagTypeStr">Tag Type: (Ex. Size, Color, Quantity)</string>
@@ -62,6 +62,8 @@
     <string name="ageTagStr">Age</string>
     <string name="sizeTagStr">Size</string>
     <string name="qualityTagStr">Quality</string>
+    <string name="conditionTagStr">Condition</string>
+
     <string-array name="ageTagArr">
         <item>Infant</item>
         <item>Kid (Ages 5+)</item>
