@@ -69,6 +69,7 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
             }
         });
     }
+
     private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
         ImageView imageView;
         public DownloadImageFromInternet(ImageView imageView) {
