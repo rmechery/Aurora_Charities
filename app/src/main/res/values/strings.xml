@@ -61,23 +61,38 @@
     <!-- Activity Add Request -->
     <string name="ageTagStr">Age</string>
     <string name="sizeTagStr">Size</string>
-    <string name="qualityTagStr">Quality</string>
+    <string name="categoriesTagStr">Categories</string>
     <string name="conditionTagStr">Condition</string>
+    <string name="searchStr">Search</string>
 
     <string-array name="ageTagArr">
         <item>Infant</item>
+        <item>Toddler</item>
         <item>Kid (Ages 5+)</item>
         <item>Teenager</item>
-        <item>Young Adult</item>
         <item>Adult</item>
-        <item>Not beneficial for society</item>
-        <item>Prehistoric</item>
-        <item>Queen Elizabeth</item>
+        <item>Elderly</item>
     </string-array>
 
     <string-array name="sizeTagArr">
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
+    </string-array>
+
+    <string-array name="conditionTagArr">
+        <item>New</item>
+        <item>Used</item>
+    </string-array>
+
+    <string-array name="categoriesTagArr">
+        <item>Clothing</item>
+        <item>Winter Gear</item>
+        <item>Athletic Gear</item>
+        <item>Club and Summer Program Supplies</item>
+        <item>School Supplies</item>
+        <item>Hygiene and Toiletries</item>
+        <item>Toys and Games</item>
+        <item>Other</item>
     </string-array>
 </resources>
