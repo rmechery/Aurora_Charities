@@ -45,4 +45,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 break;
         }
     }
+
+    public void onBackPressed () {
+        //do nothing when back button is pressed on the homescreen
+    }
 }

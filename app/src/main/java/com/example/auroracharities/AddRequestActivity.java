@@ -44,7 +44,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class AddRequestActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
-
     private static final String TAG = "AddRequestActivity";
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -58,11 +57,15 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
     private ArrayList<String> itemsArray = new ArrayList<String>();
     private List<String> ageTaglist = new ArrayList<String>();
     private List<String> sizeTagList = new ArrayList<String>();
+    private List<String> conditionTagList = new ArrayList<String>();
+    private List<String> categoriesTagList = new ArrayList<String>();
     private HashMap<String, ArrayList<String>> tagMap = new HashMap<>();
     private HashMap<String, boolean[]> selectedItemsMap = new HashMap<>();
 
     private Button ageTagBtn;
     private Button sizeTagBtn;
+    private Button conditionTagBtn;
+    private Button categoriesTagBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,22 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                 @Override
                 public void onClick(View view) {
                     CreateAlertDialog(R.array.sizeTagArr, "size");
+                }
+            });
+
+            conditionTagBtn = findViewById(R.id.conditionTagBtn);
+            conditionTagBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CreateAlertDialog(R.array.conditionTagArr, "condition");
+                }
+            });
+
+            categoriesTagBtn = findViewById(R.id.categoriesTagBtn);
+            categoriesTagBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CreateAlertDialog(R.array.categoriesTagArr, "categories");
                 }
             });
     }
@@ -112,7 +131,6 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
             });
         }
     }
-
 
     public void onStart() {
         super.onStart();
@@ -197,10 +215,9 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                     Toast.makeText(this, "Please enter the Request Tag Description.", Toast.LENGTH_SHORT).show();
                 }
                 else{
-
                     Request requestObj = new Request(charity, nameEditText.getText().toString(),
                             tagDescriptionEditText.getText().toString(),
-                            tagMap.get("age"), tagMap.get("size"));
+                            tagMap.get("age"), tagMap.get("size"), tagMap.get("categories"), tagMap.get("condition"));
 
                     Log.v(TAG, requestObj.toString());
                     db.collection("Charities").document(charity).collection("Requests")
