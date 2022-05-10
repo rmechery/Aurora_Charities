@@ -17,10 +17,27 @@
     android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/algoliaRequestDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif"
+            android:text="Request Description"
+            android:textColor="@color/material_dynamic_neutral80"
+            android:textSize="20sp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.0"
+            cardView:layout_constraintStart_toStartOf="@+id/algoliaRequestCharity"
+            cardView:layout_constraintTop_toBottomOf="@+id/algoliaRequestCharity"
+            cardView:layout_constraintVertical_bias="1.0" />
+
+        <TextView
             android:id="@+id/algoliaRequestName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:text="Request Name"
@@ -32,19 +49,30 @@
             cardView:layout_constraintVertical_bias="0" />
 
         <TextView
-        android:id="@+id/algoliaRequestCharity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
-        android:text="Request Charity"
-        android:textColor="@color/purple_200"
-        android:textSize="20sp"
-        cardView:layout_constraintBottom_toBottomOf="parent"
-        cardView:layout_constraintStart_toStartOf="@+id/algoliaRequestName"
-        cardView:layout_constraintTop_toBottomOf="@+id/algoliaRequestName" />
+            android:id="@+id/algoliaRequestCharity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif"
+            android:text="Request Charity"
+            android:textColor="@color/purple_200"
+            android:textSize="20sp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintStart_toStartOf="@+id/algoliaRequestName"
+            cardView:layout_constraintTop_toBottomOf="@+id/algoliaRequestName"
+            cardView:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintTop_toBottomOf="@+id/algoliaRequestDescription"
+            tools:ignore="MissingConstraints">
+            <!-- Chips can be declared here, or added dynamically. -->
+        </com.google.android.material.chip.ChipGroup>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
