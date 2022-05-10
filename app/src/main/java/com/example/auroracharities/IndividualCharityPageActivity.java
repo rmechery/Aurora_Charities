@@ -5,10 +5,13 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +32,12 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_charity_page);
+
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         TextView charityName = (TextView) findViewById(R.id.ind_charityName) ;
         ImageView charityLogo = (ImageView) findViewById(R.id.ind_charityLogo);
@@ -68,6 +77,19 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {

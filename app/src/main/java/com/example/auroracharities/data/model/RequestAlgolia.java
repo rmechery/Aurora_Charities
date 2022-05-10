@@ -4,19 +4,18 @@ import com.google.firebase.firestore.FieldValue;
 
 import java.util.ArrayList;
 
-public class Request {
-    public Request(){
+public class RequestAlgolia {
+    public RequestAlgolia(){
 
     }
 
-    public Request(String charity, String name, String description, ArrayList<String> ageTag, ArrayList<String> sizeTag, ArrayList<String> categoriesTag, ArrayList<String> conditionTag) {
+    public RequestAlgolia(String charity, String name, String description, ArrayList<String> ageTag, ArrayList<String> sizeTag, ArrayList<String> categoriesTag, ArrayList<String> conditionTag) {
         //"charity", "name", "description","ageTag", "sizeTag", "categoriesTag", "conditionTag"
         this.charity = charity;
         this.name = name;
         this.description = description;
         this.ageTag = ageTag;
         this.sizeTag = sizeTag;
-        this.dateCreated = FieldValue.serverTimestamp();
         this.categoriesTag = categoriesTag;
         this.conditionTag = conditionTag;
     }
@@ -53,13 +52,6 @@ public class Request {
         this.sizeTag = sizeTag;
     }
 
-    public FieldValue getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(FieldValue dateCreated) {
-        this.dateCreated = dateCreated;
-    }
 
     public String getCharity() {
         return charity;
