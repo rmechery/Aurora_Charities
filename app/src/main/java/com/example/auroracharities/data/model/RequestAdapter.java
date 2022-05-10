@@ -2,11 +2,13 @@ package com.example.auroracharities.data.model;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.example.auroracharities.IndividualCharityPageActivity;
 import com.example.auroracharities.PublicMainActivity;
 import com.example.auroracharities.R;
 import com.example.auroracharities.databinding.AlgoliaSearchRowLayoutBinding;
+import com.google.android.material.chip.Chip;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
@@ -55,12 +58,34 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         return holder;
     };
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         RequestAlgolia modal = oldData.get(position);
         //holder.algoliaSearchRowLayoutBinding.algoliaCharityName.setText(modal.getCharity());
         holder.algoliaSearchRowLayoutBinding.algoliaRequestName.setText(modal.getName());
         holder.algoliaSearchRowLayoutBinding.algoliaRequestCharity.setText(modal.getCharity());
+        holder.algoliaSearchRowLayoutBinding.algoliaRequestDescription.setText(modal.getDescription());
+        String[] myList = {"A", "B"};
+        for (int i = 0; i < myList.length; i++) {
+            // Here I am creating Chip view dynamically using current Context
+            holder.algoliaSearchRowLayoutBinding.chipGroup.clearAnimation();
+            Chip chip = new Chip(holder.algoliaSearchRowLayoutBinding.chipGroup.getContext());
+            LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(5,5,5,5);
+
+            chip.setLayoutParams(layoutParams);
+            chip.setText(myList[i]);
+
+            chip.setChipBackgroundColor(ColorStateList.valueOf(R.color.purple_200));
+            chip.setTextColor(ColorStateList.valueOf(R.color.black));
+            chip.setCloseIconTint(ColorStateList.valueOf(R.color.teal_200));
+
+            chip.setClickable(true);
+            chip.setCheckable(false);
+
+            holder.algoliaSearchRowLayoutBinding.chipGroup.addView(chip);
+        }
 
     }
 
