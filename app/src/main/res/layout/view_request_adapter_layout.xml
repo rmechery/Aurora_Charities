@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardView="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/algoliaCardView"
+    android:id="@+id/carView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
@@ -10,11 +10,11 @@
     cardView:cardElevation="8dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:focusable="true">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/algoliaRequestDescription"
@@ -69,12 +69,23 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:clickable="false"
             cardView:layout_constraintBottom_toTopOf="@+id/algoliaRequestDescription"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toBottomOf="@+id/viewRequestCharity"
             tools:ignore="MissingConstraints" />
 
+        <Button
+            android:id="@+id/viewRequestEditButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

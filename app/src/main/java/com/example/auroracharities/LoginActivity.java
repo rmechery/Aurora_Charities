@@ -3,12 +3,14 @@ package com.example.auroracharities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,6 +39,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [START initialize_auth]
         // Initialize Firebase Auth
         Log.v(TAG, "LoginActivity.java loaded.");
+
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
         signInBtn = findViewById(R.id.signInButton);
@@ -94,6 +103,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i = new Intent(LoginActivity.this, HomeScreenActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.animation_enter,
+                        R.anim.animation_leave);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onClick(View view)
     {
@@ -103,6 +124,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signIn(unEdit.getText().toString(), pwEdit.getText().toString());
                 break;
         }
+    }
+
+    public void onBackPressed () {
+        this.finish();
+        Intent i = new Intent(LoginActivity.this, HomeScreenActivity.class);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        startActivity(i);
     }
 }
 

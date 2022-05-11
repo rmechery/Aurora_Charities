@@ -9,23 +9,23 @@
 
     <Button
         android:id="@+id/continueToIndividual"
-        android:layout_width="493dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="347dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#024A97"
         android:onClick="onClick"
         android:shadowRadius="5"
         android:text="@string/continueIndiv"
-        android:textSize="25sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/continueToCharity" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="380dp"
+        android:layout_height="231dp"
         android:contentDescription="@string/action_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -35,18 +35,18 @@
 
     <Button
         android:id="@+id/continueToCharity"
-        android:layout_width="493dp"
-        android:layout_height="125dp"
+        android:layout_width="348dp"
+        android:layout_height="69dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#024A97"
         android:onClick="onClick"
         android:shadowRadius="5"
         android:text="@string/continueCharity"
-        android:textSize="25sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
