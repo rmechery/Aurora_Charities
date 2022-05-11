@@ -64,6 +64,9 @@
     <string name="categoriesTagStr">Categories</string>
     <string name="conditionTagStr">Condition</string>
     <string name="searchStr">Search</string>
+    <string name="requestNameStr">Request Name</string>
+    <string name="requestCharityStr">Request Charity</string>
+    <string name="requestDescriptionStr">Description</string>
 
     <string-array name="ageTagArr">
         <item>Infant</item>

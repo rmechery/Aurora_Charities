@@ -89,7 +89,7 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
             title = itemView.findViewById(R.id.title);
             image = itemView.findViewById(R.id.image);
             motto = itemView.findViewById(R.id.motto);
-            cardView = itemView.findViewById(R.id.carView);
+            cardView = itemView.findViewById(R.id.viewRequestCardView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
