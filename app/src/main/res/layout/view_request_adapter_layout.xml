@@ -2,15 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardView="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/algoliaCardView"
+    android:id="@+id/carView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
-    cardView:cardCornerRadius="8dp"
-    cardView:cardElevation="8dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:focusable="true">
+    cardView:cardCornerRadius="8dp"
+    cardView:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,8 +17,8 @@
 
         <TextView
             android:id="@+id/algoliaRequestDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="500dp"
+            android:layout_height="32dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif"
@@ -34,8 +33,8 @@
 
         <TextView
             android:id="@+id/viewRequestName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="498dp"
+            android:layout_height="27dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
@@ -49,8 +48,8 @@
 
         <TextView
             android:id="@+id/viewRequestCharity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="499dp"
+            android:layout_height="22dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif"
@@ -69,12 +68,24 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:clickable="false"
             cardView:layout_constraintBottom_toTopOf="@+id/algoliaRequestDescription"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toBottomOf="@+id/viewRequestCharity"
             tools:ignore="MissingConstraints" />
 
+        <Button
+            android:id="@+id/viewRequestEditButton"
+            android:layout_width="38dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="16dp"
+            cardView:layout_constraintBottom_toBottomOf="@+id/algoliaRequestDescription"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintTop_toTopOf="@+id/viewRequestName"
+            cardView:layout_constraintVertical_bias="0.512" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
