@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 android:visibility="visible"
-                tools:listitem="@layout/recyclerview_adapter_layout"
+                tools:listitem="@layout/public_charity_view_adapter_layout"
                 tools:visibility="visible" />
         </LinearLayout>
     </ScrollView>

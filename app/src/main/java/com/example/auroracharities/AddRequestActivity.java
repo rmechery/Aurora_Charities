@@ -8,10 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.algolia.search.DefaultSearchClient;
-import com.algolia.search.SearchClient;
-
-import com.algolia.search.SearchConfig;
-import com.algolia.search.SearchIndex;
 import com.example.auroracharities.data.model.Request;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,10 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class AddRequestActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private static final String TAG = "AddRequestActivity";
@@ -72,6 +62,7 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
         mAuth = FirebaseAuth.getInstance();
+
 
         nameEditText = (EditText)findViewById(R.id.addRequest_NameEditText);
         tagDescriptionEditText = (EditText)findViewById(R.id.addRequest_NameEditText2);
@@ -144,12 +135,16 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
             Toast.makeText(this, "Admin is not signed In", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(AddRequestActivity.this, HomeScreenActivity.class));
         }
-
     }
 
     private void CreateAlertDialog(int id, String tagType) {
         if (!tagMap.containsKey(tagType)) tagMap.put(tagType,  new ArrayList<String>());
         ArrayList<String> list = tagMap.get(tagType);
+
+        if(getIntent().getExtras().getStringArray("ageTagEdit") != null){
+            //tagMap.put("age" , (ArrayList<String>)Arrays.asList( getIntent().getExtras().getStringArray("ageTagEdit")));
+        }
+
 
         if (!selectedItemsMap.containsKey(tagType)) selectedItemsMap.put(tagType, new boolean[getResources().getStringArray(id).length]);
         boolean[] selectedItems = selectedItemsMap.get(tagType);
@@ -187,7 +182,6 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         builder.create().setCanceledOnTouchOutside(true);
         builder.show();
     }
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {

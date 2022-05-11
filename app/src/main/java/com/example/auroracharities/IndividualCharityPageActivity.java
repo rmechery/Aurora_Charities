@@ -1,43 +1,57 @@
 package com.example.auroracharities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 import java.util.Map;
 
 public class IndividualCharityPageActivity extends AppCompatActivity {
     String charityDocID;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
     private static final String TAG = "IndividualCharityPage";
+    private StorageReference storageReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_charity_page);
 
+        db = FirebaseFirestore.getInstance();
+
         // calling the action bar
         ActionBar actionBar = getSupportActionBar();
 
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         TextView charityName = (TextView) findViewById(R.id.ind_charityName) ;
         ImageView charityLogo = (ImageView) findViewById(R.id.ind_charityLogo);
@@ -70,7 +84,23 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
                     emailText.setText((String)docData.get("email"));
                     phoneText.setText((String)docData.get("phone"));
                     addressText.setText((String)docData.get("addressString"));
-                    new DownloadImageFromInternet((ImageView)findViewById(R.id.ind_charityLogo)).execute((String)docData.get("logo"));
+
+                    storageReference.child((String)docData.get("logo")).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Got the download URL for 'users/me/profile.png'
+                            Glide.with(IndividualCharityPageActivity.this)
+                                    .load(uri)
+                                    .into((ImageView)findViewById(R.id.ind_charityLogo));
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                            Toast.makeText( IndividualCharityPageActivity.this,"" + exception,  Toast.LENGTH_LONG);
+                        }
+                    });
+
 
                 } else {
                     Log.v(TAG, "Current data: null");
@@ -85,33 +115,18 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                Intent i = new Intent(IndividualCharityPageActivity.this, PublicMainActivity.class);
+                startActivity(i);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView;
-        public DownloadImageFromInternet(ImageView imageView) {
-            this.imageView=imageView;
-            //Toast.makeText(DownloadImageFromInternet.this, "Please wait, it may take a few minute...",Toast.LENGTH_SHORT).show();
-        }
-        protected Bitmap doInBackground(String... urls) {
-            String imageURL=urls[0];
-            Bitmap bimage=null;
-            try {
-                InputStream in=new java.net.URL(imageURL).openStream();
-                bimage= BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error Message", e.getMessage());
-                e.printStackTrace();
-            }
-            return bimage;
-        }
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
-        }
+    public void onBackPressed () {
+        Intent i = new Intent(IndividualCharityPageActivity.this, PublicMainActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+
 }

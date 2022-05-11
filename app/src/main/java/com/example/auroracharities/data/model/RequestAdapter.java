@@ -3,6 +3,7 @@ package com.example.auroracharities.data.model;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         this.oldData = new ArrayList<RequestAlgolia>();
     }
 
+    @SuppressLint("ResourceAsColor")
     @NonNull
     @Override
     public RequestAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,15 +46,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                   AlgoliaSearchRowLayoutBinding.inflate(
                           LayoutInflater.from(parent.getContext()), parent, false));
 //        RecyclerView.ViewHolder holder = new RecyclerView.ViewHolder(requestActi );
+
         holder.algoliaSearchRowLayoutBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(listener != null && holder.getAbsoluteAdapterPosition() != RecyclerView.NO_POSITION){
                     Log.v(TAG, "position = " + holder.getAbsoluteAdapterPosition());
                     listener.onItemClick(holder.getAbsoluteAdapterPosition());
-
                 }
-
             }
         });
         return holder;
@@ -67,24 +68,66 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         holder.algoliaSearchRowLayoutBinding.algoliaRequestCharity.setText(modal.getCharity());
         holder.algoliaSearchRowLayoutBinding.algoliaRequestDescription.setText(modal.getDescription());
         String[] myList = {"A", "B"};
-        for (int i = 0; i < myList.length; i++) {
-            // Here I am creating Chip view dynamically using current Context
-            holder.algoliaSearchRowLayoutBinding.chipGroup.clearAnimation();
-            Chip chip = new Chip(holder.algoliaSearchRowLayoutBinding.chipGroup.getContext());
-            LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(5,5,5,5);
+        holder.algoliaSearchRowLayoutBinding.chipGroup.removeAllViews();
 
-            chip.setLayoutParams(layoutParams);
-            chip.setText(myList[i]);
+        if (modal.getCategoriesTag() != null) {
+            for(String i : modal.getCategoriesTag()){
+                Chip chip = new Chip(holder.algoliaSearchRowLayoutBinding.chipGroup.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#7249A5")));
+                holder.algoliaSearchRowLayoutBinding.chipGroup.addView(chip);
+            }
+        }
 
-            chip.setChipBackgroundColor(ColorStateList.valueOf(R.color.purple_200));
-            chip.setTextColor(ColorStateList.valueOf(R.color.black));
-            chip.setCloseIconTint(ColorStateList.valueOf(R.color.teal_200));
+        if (modal.getAgeTag() != null) {
+            for(String i : modal.getAgeTag()){
+                Chip chip = new Chip(holder.algoliaSearchRowLayoutBinding.chipGroup.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#3FA67A")));
+                holder.algoliaSearchRowLayoutBinding.chipGroup.addView(chip);
+            }
+        }
 
-            chip.setClickable(true);
-            chip.setCheckable(false);
+        if (modal.getSizeTag() != null) {
+            for(String i : modal.getSizeTag()){
+                Chip chip = new Chip(holder.algoliaSearchRowLayoutBinding.chipGroup.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#AA065A")));
+                holder.algoliaSearchRowLayoutBinding.chipGroup.addView(chip);
+            }
+        }
 
-            holder.algoliaSearchRowLayoutBinding.chipGroup.addView(chip);
+        if (modal.getConditionTag() != null) {
+            for(String i : modal.getConditionTag()){
+                Chip chip = new Chip(holder.algoliaSearchRowLayoutBinding.chipGroup.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#5196BC")));
+                holder.algoliaSearchRowLayoutBinding.chipGroup.addView(chip);
+            }
         }
 
     }

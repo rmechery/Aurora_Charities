@@ -1,36 +1,40 @@
 package com.example.auroracharities.data.model;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.auroracharities.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-
-import java.io.InputStream;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, CharitiesAdapter.CharitiesAdapterVH> {
 
     private OnItemClickListener listener;
+    private StorageReference storageReference;
 
     public CharitiesAdapter(
             @NonNull FirestoreRecyclerOptions<Charities> options)
     {
         super(options);
+        storageReference = FirebaseStorage.getInstance().getReference();
     }
 
     public void onError(FirebaseFirestoreException e) {
@@ -38,29 +42,6 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
         // your UI to display an error message to the user.
         // ...
         Log.wtf("AHHH", "I dunno.");
-    }
-
-    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView;
-        public DownloadImageFromInternet(ImageView imageView) {
-            this.imageView=imageView;
-            //Toast.makeText(getApplicationContext(), "Please wait, it may take a few minute...",Toast.LENGTH_SHORT).show();
-        }
-        protected Bitmap doInBackground(String... urls) {
-            String imageURL=urls[0];
-            Bitmap bimage=null;
-            try {
-                InputStream in=new java.net.URL(imageURL).openStream();
-                bimage=BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error Message", e.getMessage());
-                e.printStackTrace();
-            }
-            return bimage;
-        }
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
-        }
     }
 
     @Override
@@ -72,13 +53,28 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
 
         holder.image.setBackgroundColor(Color.WHITE);
 
-        new DownloadImageFromInternet(holder.image).execute(model.getLogo());
+        storageReference.child(model.getLogo()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                Glide.with(holder.cardView.getContext())
+                        .load(uri)
+                        .into(holder.image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(holder.cardView.getContext(),"" + exception,  Toast.LENGTH_LONG);
+            }
+        });
+
     }
 
     @NonNull
     @Override
     public CharitiesAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_adapter_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.public_charity_view_adapter_layout, parent, false);
         return new CharitiesAdapter.CharitiesAdapterVH(view);
     }
 
@@ -93,7 +89,7 @@ public class CharitiesAdapter extends FirestoreRecyclerAdapter<Charities, Charit
             title = itemView.findViewById(R.id.title);
             image = itemView.findViewById(R.id.image);
             motto = itemView.findViewById(R.id.motto);
-            cardView = itemView.findViewById(R.id.carView);
+            cardView = itemView.findViewById(R.id.viewRequestCardView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
