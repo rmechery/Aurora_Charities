@@ -29,11 +29,11 @@
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintHorizontal_bias="0.0"
-            cardView:layout_constraintStart_toStartOf="@+id/viewRequestCharity"
-            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestCharity" />
+            cardView:layout_constraintStart_toStartOf="@+id/algoliaRequestCharity"
+            cardView:layout_constraintTop_toBottomOf="@+id/algoliaRequestCharity" />
 
         <TextView
-            android:id="@+id/viewRequestName"
+            android:id="@+id/algoliaRequestName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -48,7 +48,7 @@
             cardView:layout_constraintVertical_bias="0" />
 
         <TextView
-            android:id="@+id/viewRequestCharity"
+            android:id="@+id/algoliaRequestCharity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -58,8 +58,8 @@
             android:textColor="@color/purple_200"
             android:textSize="16sp"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintStart_toStartOf="@+id/viewRequestName"
-            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestName"
+            cardView:layout_constraintStart_toStartOf="@+id/algoliaRequestName"
+            cardView:layout_constraintTop_toBottomOf="@+id/algoliaRequestName"
             cardView:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.chip.ChipGroup
@@ -72,7 +72,7 @@
             cardView:layout_constraintBottom_toTopOf="@+id/algoliaRequestDescription"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestCharity"
+            cardView:layout_constraintTop_toBottomOf="@+id/algoliaRequestCharity"
             tools:ignore="MissingConstraints" />
 
 
