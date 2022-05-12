@@ -10,45 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:layout_editor_absoluteX="-120dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="-191dp"
+        tools:layout_editor_absoluteY="-335dp">
 
         <TextView
             android:id="@+id/welcomeTextCharityHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="511dp"
+            android:layout_height="175dp"
             android:layout_marginTop="50dp"
             android:fontFamily="sans-serif"
+            android:gravity="center_horizontal"
             android:text="@string/charityNameStr"
             android:textColor="#024A97"
-            android:textSize="60sp"
+            android:textSize="58sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/newRequestsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="50dp"
-            android:backgroundTint="#024A97"
-            android:fontFamily="sans-serif"
-            android:onClick="onClick"
-            android:text="@string/makeRequestsStr"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcomeTextCharityHome" />
-
-        <Button
             android:id="@+id/viewRequests"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="92dp"
             android:layout_marginEnd="50dp"
             android:backgroundTint="#024A97"
             android:fontFamily="sans-serif"
@@ -56,15 +41,16 @@
             android:text="@string/viewRequestsStr"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newRequestsButton" />
+            app:layout_constraintTop_toBottomOf="@+id/welcomeTextCharityHome" />
 
         <Button
             android:id="@+id/updateAboutUsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="50dp"
             android:backgroundTint="#024A97"
             android:fontFamily="sans-serif"
@@ -72,6 +58,7 @@
             android:text="@string/updateAbtUsStr"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewRequests" />
 
@@ -79,12 +66,14 @@
             android:id="@+id/signOutButton"
             android:layout_width="150dp"
             android:layout_height="65dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="28dp"
             android:layout_marginBottom="15dp"
             android:backgroundTint="#024A97"
             android:onClick="onClick"
             android:text="@string/signOutButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/updateAboutUsButton"
+            app:layout_constraintVertical_bias="0.904" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

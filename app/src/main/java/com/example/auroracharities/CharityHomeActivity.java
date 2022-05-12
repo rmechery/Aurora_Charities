@@ -67,9 +67,6 @@ public class CharityHomeActivity extends AppCompatActivity implements View.OnCli
 
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.newRequestsButton:
-                startActivity(new Intent(CharityHomeActivity.this, AddRequestActivity.class));
-                break;
             case R.id.viewRequests:
                 Intent i = new Intent(CharityHomeActivity.this, EditPastRequestsActivity.class);
                 i.putExtra("charityName", charity);
