@@ -11,7 +11,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="signInBtnStr">Sign In</string>
 
-    <string name="AddRequestPage">New Request</string>
+    <string name="AddRequestPage">Create/Edit Request</string>
     <string name="NameLabelStr">Name of item</string>
     <string name="EnterNameHintStr">Enter name of item:</string>
     <string name="ItemDescriptionStr">Describe the item (keywords, sentences, etc):</string>

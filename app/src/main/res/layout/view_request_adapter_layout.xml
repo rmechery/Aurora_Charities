@@ -19,18 +19,17 @@
             android:id="@+id/viewRequestDescription"
             android:layout_width="500dp"
             android:layout_height="32dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif"
             android:text="@string/requestDescriptionStr"
             android:textColor="@color/material_dynamic_neutral80"
             android:textSize="14sp"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.0"
-            cardView:layout_constraintStart_toStartOf="@+id/viewRequestCharity"
-            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestCharity"
-            tools:text="@tools:sample/lorem/random"/>
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestName"
+            cardView:layout_constraintVertical_bias="1.0"
+            tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/viewRequestName"
@@ -48,33 +47,19 @@
             cardView:layout_constraintVertical_bias="0"
             tools:text="@tools:sample/full_names"/>
 
-        <TextView
-            android:id="@+id/viewRequestCharity"
-            android:layout_width="499dp"
-            android:layout_height="22dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/requestCharityStr"
-            android:textSize="16sp"
-            cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintStart_toStartOf="@+id/viewRequestName"
-            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestName"
-            cardView:layout_constraintVertical_bias="0.0"
-            tools:text="@tools:sample/cities"/>
-
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginBottom="10dp"
             android:clickable="false"
             cardView:layout_constraintBottom_toTopOf="@+id/viewRequestDescription"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestCharity"
+            cardView:layout_constraintTop_toBottomOf="@+id/viewRequestName"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -83,11 +68,15 @@
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/ic_edit"
+            android:backgroundTint="#A13838"
+            android:backgroundTintMode="add"
+            cardView:iconTint="#CD7777"
+            cardView:iconTintMode="multiply"
             cardView:layout_constraintBottom_toBottomOf="@+id/viewRequestDescription"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintTop_toTopOf="@+id/viewRequestName"
             cardView:layout_constraintVertical_bias="0.512"
-            />
+            cardView:rippleColor="#B58181" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
