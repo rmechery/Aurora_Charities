@@ -9,16 +9,16 @@ public class EditRequest {
 
     }
 
-    public EditRequest(String charity, String name, String description, ArrayList<String> ageTag, ArrayList<String> sizeTag, ArrayList<String> categoriesTag, ArrayList<String> conditionTag) {
-        //"charity", "name", "description","ageTag", "sizeTag", "categoriesTag", "conditionTag"
-        this.charity = charity;
-        this.name = name;
-        this.description = description;
-        this.ageTag = ageTag;
-        this.sizeTag = sizeTag;
-        this.categoriesTag = categoriesTag;
-        this.conditionTag = conditionTag;
-    }
+//    public EditRequest(String charity, String name, String description, ArrayList<String> ageTag, ArrayList<String> sizeTag, ArrayList<String> categoriesTag, ArrayList<String> conditionTag) {
+//        //"charity", "name", "description","ageTag", "sizeTag", "categoriesTag", "conditionTag"
+//        this.charity = charity;
+//        this.name = name;
+//        this.description = description;
+//        this.ageTag = ageTag;
+//        this.sizeTag = sizeTag;
+//        this.categoriesTag = categoriesTag;
+//        this.conditionTag = conditionTag;
+//    }
 
     public String getName() {
         return name;
@@ -52,6 +52,13 @@ public class EditRequest {
         this.sizeTag = sizeTag;
     }
 
+//    public FieldValue getDateCreated() {
+//        return dateCreated;
+//    }
+//
+//    public void setDateCreated(FieldValue dateCreated) {
+//        this.dateCreated = dateCreated;
+//    }
 
     public String getCharity() {
         return charity;
@@ -84,5 +91,6 @@ public class EditRequest {
     private ArrayList<String> conditionTag;
     private ArrayList<String> categoriesTag;
     private String charity;
+    //private FieldValue dateCreated;
 
 }

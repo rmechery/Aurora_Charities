@@ -1,12 +1,13 @@
 package com.example.auroracharities.data.model;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,10 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.auroracharities.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 
 public class ViewRequestCharitiesAdapter extends FirestoreRecyclerAdapter<EditRequest, ViewRequestCharitiesAdapter.ViewRequestCharitiesAdapterVH> {
@@ -44,8 +45,66 @@ public class ViewRequestCharitiesAdapter extends FirestoreRecyclerAdapter<EditRe
         //Log.v("CharitiesAdapter", model.getTitle());
         //holder.title.setText(model.getTitle());
         holder.name.setText(model.getName());
-        holder.charity.setText(model.getCharity());
         holder.description.setText(model.getDescription());
+        if (model.getCategoriesTag() != null) {
+            for(String i : model.getCategoriesTag()){
+                Chip chip = new Chip(holder.name.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#7249A5")));
+                holder.chipGroup.addView(chip);
+            }
+        }
+
+        if (model.getAgeTag() != null) {
+            for(String i : model.getAgeTag()){
+                Chip chip = new Chip(holder.name.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#3FA67A")));
+                holder.chipGroup.addView(chip);
+            }
+        }
+
+        if (model.getSizeTag() != null) {
+            for(String i : model.getSizeTag()){
+                Chip chip = new Chip(holder.name.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#AA065A")));
+                holder.chipGroup.addView(chip);
+            }
+        }
+
+        if (model.getConditionTag() != null) {
+            for(String i : model.getConditionTag()){
+                Chip chip = new Chip(holder.name.getContext());
+                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,0);
+                chip.setLayoutParams(layoutParams);
+                chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                chip.setClickable(false);
+                chip.setCheckable(false);
+                chip.setText(i);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#5196BC")));
+                holder.chipGroup.addView(chip);
+            }
+        }
     }
 
     @NonNull
@@ -57,18 +116,18 @@ public class ViewRequestCharitiesAdapter extends FirestoreRecyclerAdapter<EditRe
 
     public class ViewRequestCharitiesAdapterVH extends RecyclerView.ViewHolder{
         private TextView name;
-        private TextView charity;
         private TextView description;
         private CardView cardView;
         private Button editBtn;
+        private ChipGroup chipGroup;
 
         public ViewRequestCharitiesAdapterVH(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.viewRequestName);
-            charity = itemView.findViewById(R.id.viewRequestCharity);
             description = itemView.findViewById(R.id.viewRequestDescription);
             cardView = itemView.findViewById(R.id.viewRequestCardView);
             editBtn = itemView.findViewById(R.id.viewRequestEditButton);
+            chipGroup = itemView.findViewById(R.id.chipGroup);
 
             editBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
