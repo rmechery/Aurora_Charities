@@ -9,7 +9,10 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="-64dp">
 
         <TextView
@@ -29,22 +32,25 @@
             android:id="@+id/ind_charityLogo"
             android:layout_width="68dp"
             android:layout_height="60dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="100dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/ind_charityName"
-            app:srcCompat="@drawable/ic_a4g_logo__svg_"
-            tools:layout_editor_absoluteY="32dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_a4g_logo__svg_" />
 
         <TextView
             android:id="@+id/ind_mottoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="60dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="20dp"
             android:fontFamily="sans-serif-condensed"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="@string/mottoStr"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,9 +61,9 @@
             android:id="@+id/ind_emailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="20dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/emailStr"
             android:textSize="20sp"
@@ -69,9 +75,9 @@
             android:id="@+id/ind_phoneText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/phoneNumberStr"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,20 +88,31 @@
             android:id="@+id/ind_addressText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/addressStr"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ind_phoneText" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="599dp"
-            android:layout_height="652dp"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="309dp" />
+        <ScrollView
+            android:layout_width="568dp"
+            android:layout_height="594dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="620dp" />
+            </LinearLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
