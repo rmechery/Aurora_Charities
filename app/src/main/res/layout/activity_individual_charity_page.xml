@@ -16,30 +16,26 @@
             android:id="@+id/ind_charityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/charityNameStr"
             android:textColor="#024A97"
             android:textSize="48sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ind_charityLogo"
-            android:layout_width="185dp"
-            android:layout_height="227dp"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="75dp"
+            android:layout_width="68dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="100dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ind_charityName"
-            app:srcCompat="@drawable/ic_a4g_logo__svg_" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/ind_charityName"
+            app:srcCompat="@drawable/ic_a4g_logo__svg_"
+            tools:layout_editor_absoluteY="32dp" />
 
         <TextView
             android:id="@+id/ind_mottoText"
@@ -95,19 +91,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ind_phoneText" />
 
-        <LinearLayout
-            android:id="@+id/viewRequestLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteY="800dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/viewRequestRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="500dp"
-                tools:listitem="@layout/view_request_adapter_layout" />
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="599dp"
+            android:layout_height="652dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="309dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
