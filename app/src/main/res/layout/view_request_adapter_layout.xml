@@ -23,7 +23,7 @@
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif"
             android:text="@string/requestDescriptionStr"
-            android:textColor="@color/material_dynamic_neutral80"
+            android:textColor="#000000"
             android:textSize="14sp"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"
