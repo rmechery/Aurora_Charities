@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,19 +17,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.auroracharities.data.model.EditRequest;
+import com.example.auroracharities.data.model.ViewRequestCharitiesAdapter;
+import com.example.auroracharities.data.model.ViewRequestIndividualAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class IndividualCharityPageActivity extends AppCompatActivity {
@@ -37,6 +48,16 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     private static final String TAG = "IndividualCharityPage";
     private StorageReference storageReference;
 
+    private ArrayList<EditRequest> requestList;
+    private RecyclerView recyclerView;
+    private FirebaseAuth mAuth;
+    private Map<String, Object> oldData;
+
+    private ViewRequestIndividualAdapter adapter;
+    private LinearLayout charityLayout;
+    private String charityName = "";
+
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +81,27 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
         TextView phoneText = (TextView) findViewById(R.id.ind_phoneText) ;
         TextView addressText = (TextView) findViewById(R.id.ind_addressText) ;
 
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             charityDocID = extras.getString("charityDocID");
             //The key argument here must match that used in the other activity
         }
+
+        requestList = new ArrayList<EditRequest>();
+        recyclerView = findViewById(R.id.individualRecyclerView);
+        charityLayout = findViewById(R.id.individualLinearLayout);
+
+        Query query = db.collection("Charities").document("Veterans Inc").collection("Requests").whereNotEqualTo("name", null);
+        FirestoreRecyclerOptions<EditRequest> options = new FirestoreRecyclerOptions.Builder<EditRequest>()
+                .setQuery(query, EditRequest.class)
+                .build();
+        adapter = new ViewRequestIndividualAdapter(options);
+        // Connecting Adapter class with the Recycler view*/
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+
         Log.v(TAG, "Charity DOC ID ->" + charityDocID);
         DocumentReference docRef = db.collection("Charities").document(charityDocID);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -128,5 +165,22 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
         startActivity(i);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+
+    // Function to tell the app to start getting
+    // data from database on starting of the activity
+    @Override protected void onStart()
+    {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override protected void onStop()
+    {
+        super.onStop();
+        //adapter.stopListening();
+    }
+
 
 }
