@@ -3,26 +3,31 @@ package com.example.auroracharities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.auroracharities.data.model.EditRequest;
 import com.example.auroracharities.data.model.Request;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,9 +37,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class AddRequestActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class AddAndEditRequestsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private static final String TAG = "AddRequestActivity";
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -46,11 +53,11 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
     private EditText tagDescriptionEditText;
 
     private ArrayList<String> itemsArray = new ArrayList<String>();
-    private List<String> ageTaglist = new ArrayList<String>();
-    private List<String> sizeTagList = new ArrayList<String>();
-    private List<String> conditionTagList = new ArrayList<String>();
-    private List<String> categoriesTagList = new ArrayList<String>();
-    private HashMap<String, ArrayList<String>> tagMap = new HashMap<>();
+    private ArrayList<String> ageTaglist = new ArrayList<String>();
+    private ArrayList<String> sizeTagList = new ArrayList<String>();
+    private ArrayList<String> conditionTagList = new ArrayList<String>();
+    private ArrayList<String> categoriesTagList = new ArrayList<String>();
+    private HashMap<String, ArrayList<String>> tagMap;
     private HashMap<String, boolean[]> selectedItemsMap = new HashMap<>();
 
     private Button ageTagBtn;
@@ -61,12 +68,31 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_request);
-        mAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_add_and_edit_requests);
 
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // Customize the back button
+        actionBar.setHomeAsUpIndicator(android.R.drawable.ic_delete);
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        mAuth = FirebaseAuth.getInstance();
+        getCharity();
+        if(charity != null) actionBar.setTitle(charity + " Create/Edit Request Page");
+        else actionBar.setTitle("Aurora Charities Create/Edit Request Page");
+
+        tagMap = new HashMap<>();
 
         nameEditText = (EditText)findViewById(R.id.addRequest_NameEditText);
         tagDescriptionEditText = (EditText)findViewById(R.id.addRequest_NameEditText2);
+
+        tagMap.put("age", new ArrayList<String>());
+        tagMap.put("categories", new ArrayList<String>());
+        tagMap.put("condition", new ArrayList<String>());
+        tagMap.put("size", new ArrayList<String>());
 
         if (getIntent().getExtras() != null) {
             if(getIntent().getExtras().get("name") != null) {
@@ -74,6 +100,18 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
             }
             if(getIntent().getExtras().get("description") != null) {
                 tagDescriptionEditText.setText((String)getIntent().getExtras().get("description"));
+            }
+            if(getIntent().getExtras().get("age") != null) {
+                tagMap.put("age", (ArrayList<String>) getIntent().getExtras().get("age"));
+            }
+            if(getIntent().getExtras().get("categories") != null) {
+                 tagMap.put("categories", (ArrayList<String>) getIntent().getExtras().get("categories"));
+            }
+            if(getIntent().getExtras().get("condition") != null) {
+                 tagMap.put("condition", (ArrayList<String>) getIntent().getExtras().get("condition"));
+            }
+            if(getIntent().getExtras().get("size") != null) {
+                 tagMap.put("size", (ArrayList<String>) getIntent().getExtras().get("size"));
             }
         }
 
@@ -139,121 +177,78 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Toast.makeText(this, "Admin is signed In", Toast.LENGTH_SHORT).show();
-            getCharity();
         }
         else{
             Toast.makeText(this, "Admin is not signed In", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AddRequestActivity.this, HomeScreenActivity.class));
+            startActivity(new Intent(AddAndEditRequestsActivity.this, HomeScreenActivity.class));
         }
     }
 
-
-    private void CreateAlertDialog(int id, String tagType) {
-        if (!tagMap.containsKey(tagType)) tagMap.put(tagType,  new ArrayList<String>());
-        ArrayList<String> list = tagMap.get(tagType);
-
-        boolean[] selectedItems;
-        if (!selectedItemsMap.containsKey(tagType)) selectedItemsMap.put(tagType, new boolean[getResources().getStringArray(id).length]);
-        selectedItems = selectedItemsMap.get(tagType);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        Bundle bundle = getIntent().getExtras();
-        List<Boolean> selectedArrList = new ArrayList<Boolean>();
-        if(bundle != null) {
-            if (tagType == "age"  &&  bundle.getStringArrayList("ageTag") != null) {
-                for (int e = 0; e < getResources().getStringArray(R.array.ageTagArr).length; e++) {
-                    selectedArrList.add(false);
-                }
-                for (int i = 0; i < getResources().getStringArray(R.array.ageTagArr).length; i++) {
-                    for (int j = 0; j < bundle.getStringArrayList("ageTag").size(); j++) {
-                        if (getResources().getStringArray(R.array.ageTagArr)[i].contains( bundle.getStringArrayList("ageTag").get(j))) {
-                            selectedArrList.set(i, true);
-                            list.add(getResources().getStringArray(R.array.ageTagArr)[i]);
-                        }
-                    }
+    private void CreateAlertDialog(int id, String tagType){
+        //View view = LayoutInflater.from(this).inflate(R.layout.activity_add_request, null);
+        ChipGroup chipGroup = new ChipGroup(this);
+        for(int i = 0; i < getResources().getStringArray(id).length; i++){
+            Chip chip = new Chip(this);
+            LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(10,10,10,10);
+            chip.setLayoutParams(layoutParams);
+            chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+            chip.setClickable(true);
+            chip.setCheckable(true);
+            chip.setPadding(15,5,15,5);
+            chip.setText(getResources().getStringArray(id)[i]);
+            switch(tagType){
+                case "age":
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#3FA67A")));
+                    break;
+                case "categories":
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#7249A5")));
+                    break;
+                case "condition":
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#5196BC")));
+                    break;
+                case "size":
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#AA065A")));
+                    break;
+            }
+            if (tagMap.get(tagType) != null ) {
+                for(String j : tagMap.get(tagType)){
+                    if (j.equalsIgnoreCase(getResources().getStringArray(id)[i])) chip.setChecked(true);
                 }
             }
-            else if (tagType == "categories"  &&  bundle.getStringArrayList("categoriesTag") != null) {
-                for (int e = 0; e < getResources().getStringArray(R.array.categoriesTagArr).length; e++) {
-                    selectedArrList.add(false);
-                }
-                for (int i = 0; i < getResources().getStringArray(R.array.categoriesTagArr).length; i++) {
-                    for (int j = 0; j < bundle.getStringArrayList("categoriesTag").size(); j++) {
-                        if (getResources().getStringArray(R.array.categoriesTagArr)[i].contains( bundle.getStringArrayList("categoriesTag").get(j))) {
-                            selectedArrList.set(i, true);
-                            list.add(getResources().getStringArray(R.array.categoriesTagArr)[i]);
-                        }
-                    }
-                }
-            }
-            else if (tagType == "condition"  &&  bundle.getStringArrayList("conditionTag") != null) {
-                for (int e = 0; e < getResources().getStringArray(R.array.conditionTagArr).length; e++) {
-                    selectedArrList.add(false);
-                }
-                for (int i = 0; i < getResources().getStringArray(R.array.conditionTagArr).length; i++) {
-                    for (int j = 0; j < bundle.getStringArrayList("conditionTag").size(); j++) {
-                        if (getResources().getStringArray(R.array.conditionTagArr)[i].contains( bundle.getStringArrayList("conditionTag").get(j))) {
-                            selectedArrList.set(i, true);
-                            list.add(getResources().getStringArray(R.array.conditionTagArr)[i]);
-                        }
-                    }
-                }
-            }
-            else if (tagType == "size"  &&  bundle.getStringArrayList("sizeTag") != null) {
-                for (int e = 0; e < getResources().getStringArray(R.array.sizeTagArr).length; e++) {
-                    selectedArrList.add(false);
-                }
-                for (int i = 0; i < getResources().getStringArray(R.array.sizeTagArr).length; i++) {
-                    for (int j = 0; j < bundle.getStringArrayList("sizeTag").size(); j++) {
-                        if (getResources().getStringArray(R.array.sizeTagArr)[i].contains( bundle.getStringArrayList("sizeTag").get(j))) {
-                            selectedArrList.set(i, true);
-                            list.add(getResources().getStringArray(R.array.sizeTagArr)[i]);
-                        }
-                    }
-                }
-            }
-
-            if (selectedArrList.size() != 0) {
-                selectedItems = new boolean[ selectedArrList.toArray().length];
-                for(int k = 0; k < selectedArrList.size(); k++){
-                    selectedItems[k] = (boolean) selectedArrList.get(k);
-                }
-            }
+            chipGroup.addView(chip);
         }
 
-        builder.setCancelable(true);
-        builder.setTitle("Select " + tagType);
-        boolean[] finalSelectedItems = selectedItems;
-        builder.setMultiChoiceItems(id, selectedItems, new DialogInterface.OnMultiChoiceClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                    String[] tagArr = getResources().getStringArray(id);
 
-                    Log.d(TAG, Arrays.toString(finalSelectedItems));
-                    finalSelectedItems[i] = b;
+        new AlertDialog.Builder(this)
+                .setTitle("Add " + tagType + " tag")
+                .setMessage("Click on any number of tags. Press done when completed or cancel to clear selection")
+                .setView(chipGroup)
 
-                    if(b){
-                        list.add(tagArr[i]);
-                    } else if(list.contains(tagArr[i])){
-                        list.remove(tagArr[i]);
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                    // Continue with delete operation
+                    tagMap.get(tagType).clear();
+                    for (int i=0; i<chipGroup.getChildCount();i++){
+                        Chip chip = (Chip)chipGroup.getChildAt(i);
+                        if (chip.isChecked()){
+                            //this chip is selected.....
+                            tagMap.get(tagType).add((String) chip.getText());
+                        }
                     }
-            }
-        });
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String data = "";
-                for(String item: list){
-                    data = data + item;
-                }
-                Toast.makeText(AddRequestActivity.this, data, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, list.toString());
-            }
-        });
+                    Set<String> set = new HashSet<>(tagMap.get(tagType));
+                    tagMap.get(tagType).clear();
+                    tagMap.get(tagType).addAll(set);
+                    Log.v(TAG, tagMap.toString());
+                })
 
-        builder.create().setCanceledOnTouchOutside(true);
-        builder.show();
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                //.setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
@@ -290,20 +285,17 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-
-                                        Toast.makeText(AddRequestActivity.this, "SUCCESS:" + requestObj.getName() + " added to the database.", Toast.LENGTH_LONG).show();
-                                        Intent i = new Intent(AddRequestActivity.this, EditPastRequestsActivity.class);
-//                                        i.replaceExtras(new Bundle());
-//                                        i.setAction("");
-//                                        i.setData(null);
-//                                        i.setFlags(0);
+                                        Toast.makeText(AddAndEditRequestsActivity.this, "SUCCESS:" + requestObj.getName() + " added to the database.", Toast.LENGTH_LONG).show();
+                                        Intent i = new Intent(AddAndEditRequestsActivity.this, ViewEditRequestsActivity.class);
+                                        i.putExtra("charityName", charity);
                                         startActivity(i);
+                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out  );
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(AddRequestActivity.this, "WARNING: Error Adding Document.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AddAndEditRequestsActivity.this, "WARNING: Error Adding Document.", Toast.LENGTH_LONG).show();
                                         Log.w(TAG, "Error adding document", e);
                                     }
                                 });
@@ -313,15 +305,17 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(AddRequestActivity.this, "SUCCESS:" + requestObj.getName() + " updated on database.", Toast.LENGTH_LONG).show();
-                                        Intent i = new Intent(AddRequestActivity.this, EditPastRequestsActivity.class);
+                                        Toast.makeText(AddAndEditRequestsActivity.this, "SUCCESS:" + requestObj.getName() + " updated on database.", Toast.LENGTH_LONG).show();
+                                        Intent i = new Intent(AddAndEditRequestsActivity.this, ViewEditRequestsActivity.class);
+                                        i.putExtra("charityName", charity);
                                         startActivity(i);
+                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out  );
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(AddRequestActivity.this, "WARNING: Error Adding Document.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AddAndEditRequestsActivity.this, "WARNING: Error Adding Document.", Toast.LENGTH_LONG).show();
                                         Log.w(TAG, "Error adding document", e);
                                     }
                                 });
@@ -330,5 +324,29 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                 break;
         }
     }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i = new Intent(this, ViewEditRequestsActivity.class);
+                i.putExtra("charityName", charity);
+                startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out );
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed () {
+        Intent i = new Intent(this, ViewEditRequestsActivity.class);
+        i.putExtra("charityName", charity);
+        startActivity(i);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out  );
+
+    }
+
 
 }

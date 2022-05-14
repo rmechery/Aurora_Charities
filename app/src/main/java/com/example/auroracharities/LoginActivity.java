@@ -1,7 +1,9 @@
 package com.example.auroracharities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -121,7 +123,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.signInButton:
                 // Do something
-                signIn(unEdit.getText().toString(), pwEdit.getText().toString());
+                if(TextUtils.isEmpty(unEdit.getText().toString()) || TextUtils.isEmpty(pwEdit.getText().toString())){
+                    Toast.makeText(LoginActivity.this, "Enter username or password before submission.", Toast.LENGTH_LONG);
+                }
+                else {
+                    signIn(unEdit.getText().toString(), pwEdit.getText().toString());
+                }
+                break;
+            case R.id.NewUserBtn:
+                String url = "https://docs.google.com/forms/d/e/1FAIpQLSdy3T6zJoR8fnnMNKWJLvcC6ScOzKO-Qf-uv2u_KukN4pjyog/viewform?usp=sf_link";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(Intent.createChooser(intent, "Browse with"));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
         }
     }

@@ -15,13 +15,13 @@
             android:name=".NavigationBarActivity"
             android:exported="false" />
         <activity
-            android:name=".EditAboutusPageActivity"
+            android:name=".EditPublicProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ActivityEditAboutusPageActivity"
             android:exported="false" />
         <activity
-            android:name=".EditPastRequestsActivity"
+            android:name=".ViewEditRequestsActivity"
             android:exported="false" />
 
         <meta-data
@@ -46,7 +46,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".PublicMainActivity" />
         <activity android:name=".HomeScreenActivity" />
-        <activity android:name=".AddRequestActivity" />
+        <activity android:name=".AddAndEditRequestsActivity" />
         <activity android:name=".CharityHomeActivity" />
     </application>
 

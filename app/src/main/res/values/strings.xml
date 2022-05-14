@@ -34,7 +34,7 @@
     //charity home page strings
     <string name="charityNameStr">*charity name</string>
     <string name="makeRequestsStr">Create a New Request</string>
-    <string name="viewRequestsStr">View and Edit Past Requests</string>
+    <string name="viewRequestsStr">Create and Edit Requests</string>
     <string name="updateAbtUsStr">Update About Us Page</string>
 
     //about us view page strings
@@ -78,9 +78,12 @@
     </string-array>
 
     <string-array name="sizeTagArr">
+        <item>XS</item>
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
+        <item>XL</item>
+        <item>XXL</item>
     </string-array>
 
     <string-array name="conditionTagArr">
