@@ -62,7 +62,7 @@ public class EditPastRequestsActivity extends AppCompatActivity implements View.
         requestList = new ArrayList<EditRequest>();
         recyclerView = findViewById(R.id.viewRequestRecyclerView);
         charityLayout = findViewById(R.id.viewRequestLayout);
-        if(mAuth.getCurrentUser() != null){
+        if(mAuth.getCurrentUser() != null && charityName != null){
             Query query =  db.collection("Charities").document(charityName).collection("Requests").whereNotEqualTo("name", null);
             FirestoreRecyclerOptions<EditRequest> options = new FirestoreRecyclerOptions.Builder<EditRequest>()
                     .setQuery(query, EditRequest.class)
@@ -156,9 +156,6 @@ public class EditPastRequestsActivity extends AppCompatActivity implements View.
                         }
                     }
                 });
-
-
-
             }
         };
 

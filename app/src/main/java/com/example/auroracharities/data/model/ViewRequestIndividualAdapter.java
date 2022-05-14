@@ -23,35 +23,30 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 
-public class ViewRequestCharitiesAdapter extends FirestoreRecyclerAdapter<EditRequest, ViewRequestCharitiesAdapter.ViewRequestCharitiesAdapterVH> {
+public class ViewRequestIndividualAdapter extends FirestoreRecyclerAdapter<EditRequest, ViewRequestIndividualAdapter.ViewRequestIndividualAdapterVH> {
 
     private OnItemClickListener listener;
 
-    public ViewRequestCharitiesAdapter(
+    public ViewRequestIndividualAdapter(
             @NonNull FirestoreRecyclerOptions<EditRequest> options)
     {
         super(options);
     }
 
     public void onError(FirebaseFirestoreException e) {
-        // Called when there is an error getting a query snapshot. You may want to update
-        // your UI to display an error message to the user.
-        // ...
         Log.wtf("AHHH", "I dunno.");
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewRequestCharitiesAdapterVH holder, int position, @NonNull EditRequest model) {
-        //Log.v("CharitiesAdapter", model.getTitle());
-        //holder.title.setText(model.getTitle());
+    protected void onBindViewHolder(@NonNull ViewRequestIndividualAdapterVH holder, int position, @NonNull EditRequest model) {
         holder.name.setText(model.getName());
         holder.description.setText(model.getDescription());
+        holder.charity.setText(model.getCharity());
         holder.chipGroup.removeAllViewsInLayout();
-
         if (model.getCategoriesTag() != null) {
             for(String i : model.getCategoriesTag()){
                 Chip chip = new Chip(holder.name.getContext());
-                LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams.setMargins(0,0,0,0);
                 chip.setLayoutParams(layoutParams);
                 chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
@@ -111,27 +106,27 @@ public class ViewRequestCharitiesAdapter extends FirestoreRecyclerAdapter<EditRe
 
     @NonNull
     @Override
-    public ViewRequestCharitiesAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_request_adapter_layout, parent, false);
-        return new ViewRequestCharitiesAdapter.ViewRequestCharitiesAdapterVH(view);
+    public ViewRequestIndividualAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_request_individual_adapter_layout, parent, false);
+        return new ViewRequestIndividualAdapter.ViewRequestIndividualAdapterVH(view);
     }
 
-    public class ViewRequestCharitiesAdapterVH extends RecyclerView.ViewHolder{
+    public class ViewRequestIndividualAdapterVH extends RecyclerView.ViewHolder{
         private TextView name;
         private TextView description;
+        private TextView charity;
         private CardView cardView;
-        private Button editBtn;
         private ChipGroup chipGroup;
 
-        public ViewRequestCharitiesAdapterVH(@NonNull View itemView) {
+        public ViewRequestIndividualAdapterVH(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.viewRequestName);
-            description = itemView.findViewById(R.id.viewRequestDescription);
-            cardView = itemView.findViewById(R.id.viewRequestCardView);
-            editBtn = itemView.findViewById(R.id.viewRequestEditButton);
-            chipGroup = itemView.findViewById(R.id.chipGroup);
+            name = itemView.findViewById(R.id.viewRequestIndividualName);
+            description = itemView.findViewById(R.id.viewRequestIndividualDescription);
+            charity = itemView.findViewById(R.id.viewRequestIndividualCharity);
+            cardView = itemView.findViewById(R.id.viewRequestIndividualCardView);
+            chipGroup = itemView.findViewById(R.id.chipGroupIndividual);
 
-            editBtn.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getLayoutPosition();

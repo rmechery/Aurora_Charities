@@ -69,8 +69,29 @@ public class CharityHomeActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()){
             case R.id.viewRequests:
                 Intent i = new Intent(CharityHomeActivity.this, EditPastRequestsActivity.class);
-                i.putExtra("charityName", charity);
-                startActivity(i);
+                if(mAuth.getCurrentUser() != null){
+                    Log.v(TAG, mAuth.getCurrentUser().getEmail());
+                    DocumentReference docRef = db.collection("users").document((String)mAuth.getCurrentUser().getEmail());
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    charity = (String)document.getData().get("charity");
+                                    i.putExtra("charityName", charity);
+                                    startActivity(i);
+
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                }
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
+                            }
+                        }
+                    });
+                }
+
                 break;
             case R.id.updateAboutUsButton:
                 startActivity(new Intent(CharityHomeActivity.this, EditAboutusPageActivity.class));
