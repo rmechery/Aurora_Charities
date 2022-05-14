@@ -26,8 +26,10 @@ import com.example.auroracharities.data.model.EditRequest;
 import com.example.auroracharities.data.model.ViewRequestCharitiesAdapter;
 import com.example.auroracharities.data.model.ViewRequestIndividualAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,6 +37,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -58,6 +61,7 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     private String charityName = "";
 
     private ConstraintLayout constraintLayout;
+    private String charity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,7 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
+
         TextView charityName = (TextView) findViewById(R.id.ind_charityName) ;
         ImageView charityLogo = (ImageView) findViewById(R.id.ind_charityLogo);
         TextView mottoText = (TextView) findViewById(R.id.ind_mottoText) ;
@@ -85,6 +90,7 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             charityDocID = extras.getString("charityDocID");
+            charity = extras.getString("charityName");
             //The key argument here must match that used in the other activity
         }
 
@@ -92,14 +98,18 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.individualRecyclerView);
         charityLayout = findViewById(R.id.individualLinearLayout);
 
-        Query query = db.collection("Charities").document("Veterans Inc").collection("Requests").whereNotEqualTo("name", null);
-        FirestoreRecyclerOptions<EditRequest> options = new FirestoreRecyclerOptions.Builder<EditRequest>()
-                .setQuery(query, EditRequest.class)
-                .build();
-        adapter = new ViewRequestIndividualAdapter(options);
-        // Connecting Adapter class with the Recycler view*/
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+
+
+        if (charityDocID != null) {
+            Query query = db.collection("Charities").document(charityDocID).collection("Requests").whereNotEqualTo("name", null);
+            FirestoreRecyclerOptions<EditRequest> options = new FirestoreRecyclerOptions.Builder<EditRequest>()
+                    .setQuery(query, EditRequest.class)
+                    .build();
+            adapter = new ViewRequestIndividualAdapter(options);
+            // Connecting Adapter class with the Recycler view*/
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
+        }
 
 
         Log.v(TAG, "Charity DOC ID ->" + charityDocID);
@@ -154,7 +164,7 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
             case android.R.id.home:
                 Intent i = new Intent(IndividualCharityPageActivity.this, PublicMainActivity.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -163,7 +173,7 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     public void onBackPressed () {
         Intent i = new Intent(IndividualCharityPageActivity.this, PublicMainActivity.class);
         startActivity(i);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     // Function to tell the app to start getting
@@ -171,7 +181,22 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     @Override protected void onStart()
     {
         super.onStart();
-        adapter.startListening();
+
+        db.collection("Charities").document(charityDocID).collection("Requests").whereNotEqualTo("name", null).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                Query query = db.collection("Charities").document(charityDocID).collection("Requests").whereNotEqualTo("name", null);
+                FirestoreRecyclerOptions<EditRequest> options = new FirestoreRecyclerOptions.Builder<EditRequest>()
+                        .setQuery(query, EditRequest.class)
+                        .build();
+                adapter = new ViewRequestIndividualAdapter(options);
+                // Connecting Adapter class with the Recycler view*/
+                recyclerView.setLayoutManager(new LinearLayoutManager(IndividualCharityPageActivity.this));
+                recyclerView.setAdapter(adapter);
+                if(adapter != null) adapter.startListening();
+            }
+        });
+
     }
 
     // Function to tell the app to stop getting
@@ -179,7 +204,30 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
     @Override protected void onStop()
     {
         super.onStop();
-        //adapter.stopListening();
+        adapter.stopListening();
+    }
+
+    public void getCharity(){
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            Log.v(TAG, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            DocumentReference docRef = db.collection("users").document( FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            charity = (String)document.getData().get("charity");
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+        }
     }
 
 

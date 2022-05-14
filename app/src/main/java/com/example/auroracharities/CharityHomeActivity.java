@@ -3,10 +3,12 @@ package com.example.auroracharities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,7 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CharityHomeActivity extends AppCompatActivity implements View.OnClickListener {
-    private String charity = "charity";
+    private String charity;
     private static final String TAG = "CharityHomeActivity";
     private FirebaseAuth mAuth;
     // [END declare_auth]
@@ -58,7 +60,17 @@ public class CharityHomeActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_charity_home);
         mAuth = FirebaseAuth.getInstance();
         //charity = getIntent().getStringExtra("charity");
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // Customize the back button
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_home_button);
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
         getCharity();
+        if(charity != null) actionBar.setTitle(charity + " Admin Home Page");
+        else actionBar.setTitle("Aurora Charities Admin Home Page");
     }
 
     public void signOut(){
@@ -68,7 +80,7 @@ public class CharityHomeActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.viewRequests:
-                Intent i = new Intent(CharityHomeActivity.this, EditPastRequestsActivity.class);
+                Intent i = new Intent(CharityHomeActivity.this, ViewEditRequestsActivity.class);
                 if(mAuth.getCurrentUser() != null){
                     Log.v(TAG, mAuth.getCurrentUser().getEmail());
                     DocumentReference docRef = db.collection("users").document((String)mAuth.getCurrentUser().getEmail());
@@ -81,7 +93,7 @@ public class CharityHomeActivity extends AppCompatActivity implements View.OnCli
                                     charity = (String)document.getData().get("charity");
                                     i.putExtra("charityName", charity);
                                     startActivity(i);
-
+                                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 } else {
                                     Log.d(TAG, "No such document");
                                 }
@@ -94,12 +106,36 @@ public class CharityHomeActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.updateAboutUsButton:
-                startActivity(new Intent(CharityHomeActivity.this, EditAboutusPageActivity.class));
+                Intent i2 = new Intent(CharityHomeActivity.this, EditPublicProfileActivity.class);
+                i2.putExtra("charityName", charity);
+                startActivity(i2);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
             case R.id.signOutButton:
                 signOut();
                 startActivity(new Intent(CharityHomeActivity.this, LoginActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
         }
+    }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i = new Intent(this, HomeScreenActivity.class);
+                startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed () {
+        Intent i = new Intent(this, HomeScreenActivity.class);
+        startActivity(i);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

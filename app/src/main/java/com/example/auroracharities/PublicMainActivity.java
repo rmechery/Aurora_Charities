@@ -195,16 +195,7 @@ public class PublicMainActivity extends AppCompatActivity implements CharitiesAd
         return true;
     }
 
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                Intent i = new Intent(PublicMainActivity.this, HomeScreenActivity.class);
-                startActivity(i);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
 
     @Override
@@ -261,5 +252,25 @@ public class PublicMainActivity extends AppCompatActivity implements CharitiesAd
         charityLayout.bringToFront();
 
         return false;
+    }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i = new Intent(this, HomeScreenActivity.class);
+                startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed () {
+        Intent i = new Intent(this, HomeScreenActivity.class);
+        startActivity(i);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

@@ -9,6 +9,6 @@ public class ActivityEditAboutusPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_aboutus_page);
+        setContentView(R.layout.activity_edit_charity_profile);
     }
 }

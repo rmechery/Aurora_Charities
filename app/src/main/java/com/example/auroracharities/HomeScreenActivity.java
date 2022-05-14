@@ -33,14 +33,17 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                     // User is signed in
                     //Log.v("HomeScreenActivity",user.getEmail());
                     startActivity(new Intent(HomeScreenActivity.this, CharityHomeActivity.class));
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
                     // No user is signed in
                     startActivity(new Intent(HomeScreenActivity.this, LoginActivity.class));
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
                 break;
             case R.id.continueToIndividual:
                 startActivity(new Intent(HomeScreenActivity.this, PublicMainActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 //setContentView(R.layout.activity_public_main);
                 break;
         }
