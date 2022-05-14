@@ -178,7 +178,7 @@ public class EditPastRequestsActivity extends AppCompatActivity implements View.
     @Override protected void onStop()
     {
         super.onStop();
-        //adapter.stopListening();
+        adapter.stopListening();
     }
 
     @Override

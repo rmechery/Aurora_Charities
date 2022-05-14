@@ -3,13 +3,16 @@ package com.example.auroracharities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -46,10 +51,10 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
     private EditText tagDescriptionEditText;
 
     private ArrayList<String> itemsArray = new ArrayList<String>();
-    private List<String> ageTaglist = new ArrayList<String>();
-    private List<String> sizeTagList = new ArrayList<String>();
-    private List<String> conditionTagList = new ArrayList<String>();
-    private List<String> categoriesTagList = new ArrayList<String>();
+    private ArrayList<String> ageTaglist = new ArrayList<String>();
+    private ArrayList<String> sizeTagList = new ArrayList<String>();
+    private ArrayList<String> conditionTagList = new ArrayList<String>();
+    private ArrayList<String> categoriesTagList = new ArrayList<String>();
     private HashMap<String, ArrayList<String>> tagMap = new HashMap<>();
     private HashMap<String, boolean[]> selectedItemsMap = new HashMap<>();
 
@@ -64,6 +69,8 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_add_request);
         mAuth = FirebaseAuth.getInstance();
 
+        getCharity();
+
 
         nameEditText = (EditText)findViewById(R.id.addRequest_NameEditText);
         tagDescriptionEditText = (EditText)findViewById(R.id.addRequest_NameEditText2);
@@ -74,6 +81,18 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
             }
             if(getIntent().getExtras().get("description") != null) {
                 tagDescriptionEditText.setText((String)getIntent().getExtras().get("description"));
+            }
+            if(getIntent().getExtras().get("ageTag") != null) {
+                ageTaglist = (ArrayList<String>) getIntent().getExtras().get("ageTag");
+            }
+            if(getIntent().getExtras().get("categoriesTag") != null) {
+                ageTaglist = (ArrayList<String>) getIntent().getExtras().get("categoriesTag");
+            }
+            if(getIntent().getExtras().get("conditionTag") != null) {
+                ageTaglist = (ArrayList<String>) getIntent().getExtras().get("conditionTag");
+            }
+            if(getIntent().getExtras().get("sizeTag") != null) {
+                ageTaglist = (ArrayList<String>) getIntent().getExtras().get("sizeTag");
             }
         }
 
@@ -139,7 +158,6 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Toast.makeText(this, "Admin is signed In", Toast.LENGTH_SHORT).show();
-            getCharity();
         }
         else{
             Toast.makeText(this, "Admin is not signed In", Toast.LENGTH_SHORT).show();
@@ -147,8 +165,56 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
         }
     }
 
+    private void CreateAlertDialog(int id, String tagType){
+        //View view = LayoutInflater.from(this).inflate(R.layout.activity_add_request, null);
+        ChipGroup chipGroup = new ChipGroup(this);
+        for(int i = 0; i < getResources().getStringArray(id).length; i++){
+            Chip chip = new Chip(this);
+            LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0,0,0,0);
+            chip.setLayoutParams(layoutParams);
+            chip.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+            chip.setClickable(true);
+            chip.setCheckable(true);
+            chip.setText(getResources().getStringArray(id)[i]);
+            switch(tagType){
+                case "ageTag":
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#3FA67A")));
+                    break;
+                case "categoriesTag":
 
-    private void CreateAlertDialog(int id, String tagType) {
+                    break;
+                case "conditionTag":
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#5196BC")));
+                    break;
+                case "sizeTag":
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor("#AA065A")));
+                    break;
+            }
+
+            chipGroup.addView(chip);
+        }
+
+
+        new AlertDialog.Builder(this)
+                .setTitle("Add " + tagType + " tag")
+                .setMessage("Click on any number of tags. Press done when completed or cancel to clear selection")
+                .setView(chipGroup)
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                    // Continue with delete operation
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                //.setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+
+    private void CreateAlertDialog2(int id, String tagType) {
         if (!tagMap.containsKey(tagType)) tagMap.put(tagType,  new ArrayList<String>());
         ArrayList<String> list = tagMap.get(tagType);
 
@@ -290,13 +356,8 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-
                                         Toast.makeText(AddRequestActivity.this, "SUCCESS:" + requestObj.getName() + " added to the database.", Toast.LENGTH_LONG).show();
                                         Intent i = new Intent(AddRequestActivity.this, EditPastRequestsActivity.class);
-//                                        i.replaceExtras(new Bundle());
-//                                        i.setAction("");
-//                                        i.setData(null);
-//                                        i.setFlags(0);
                                         startActivity(i);
                                     }
                                 })
@@ -330,5 +391,6 @@ public class AddRequestActivity extends AppCompatActivity implements AdapterView
                 break;
         }
     }
+
 
 }
