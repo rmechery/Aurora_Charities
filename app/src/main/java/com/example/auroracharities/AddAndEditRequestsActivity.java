@@ -222,7 +222,7 @@ public class AddAndEditRequestsActivity extends AppCompatActivity implements Ada
 
         new AlertDialog.Builder(this)
                 .setTitle("Add " + tagType + " tag")
-                .setMessage("Click on any number of tags. Press done when completed or cancel to clear selection")
+                .setMessage("Click on any number of tags. Press done when completed or cancel to clear selection.")
                 .setView(chipGroup)
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.

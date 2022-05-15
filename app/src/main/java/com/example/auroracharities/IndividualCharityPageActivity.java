@@ -1,13 +1,21 @@
 package com.example.auroracharities;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,8 +24,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +53,9 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class IndividualCharityPageActivity extends AppCompatActivity {
@@ -95,9 +108,8 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
         }
 
         requestList = new ArrayList<EditRequest>();
-        recyclerView = findViewById(R.id.individualRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.individualRecyclerView);
         charityLayout = findViewById(R.id.individualLinearLayout);
-
 
 
         if (charityDocID != null) {
@@ -193,7 +205,110 @@ public class IndividualCharityPageActivity extends AppCompatActivity {
                 // Connecting Adapter class with the Recycler view*/
                 recyclerView.setLayoutManager(new LinearLayoutManager(IndividualCharityPageActivity.this));
                 recyclerView.setAdapter(adapter);
-                if(adapter != null) adapter.startListening();
+
+                if(adapter != null) {
+
+                    adapter.setOnItemClickListener(new ViewRequestIndividualAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                            LinearLayout layout = new LinearLayout(IndividualCharityPageActivity.this);
+                            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            layout.setOrientation(LinearLayout.VERTICAL);
+                            layout.setLayoutParams(parms);
+
+                            layout.setGravity(Gravity.CLIP_VERTICAL);
+                            layout.setPadding(2, 2, 2, 2);
+
+
+                            EditText nameEditText = new EditText(IndividualCharityPageActivity.this);
+                            TextView nameTextView = new TextView(IndividualCharityPageActivity.this);
+                            EditText emailEditText = new EditText(IndividualCharityPageActivity.this);
+                            emailEditText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                            TextView emailTextView = new TextView(IndividualCharityPageActivity.this);
+                            EditText msgEditText = new EditText(IndividualCharityPageActivity.this);
+                            TextView msgTextView = new TextView(IndividualCharityPageActivity.this);
+
+                            nameTextView.setText("Enter Name:");
+                            nameTextView.setPadding(0, 10, 0, 5);
+                            nameTextView.setGravity(Gravity.LEFT);
+                            nameTextView.setTextSize(20);
+
+                            emailTextView.setText("Enter Email:");
+                            emailTextView.setPadding(0, 10, 0, 5);
+                            emailTextView.setGravity(Gravity.LEFT);
+                            emailTextView.setTextSize(20);
+
+                            msgTextView.setText("Enter Message (Optional):");
+                            msgTextView.setPadding(0, 10, 0, 5);
+                            msgTextView.setGravity(Gravity.LEFT);
+                            msgTextView.setTextSize(20);
+
+                            LinearLayout.LayoutParams nameTextViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            nameTextViewParams.bottomMargin = 5;
+                            layout.addView(nameTextView,nameTextViewParams);
+                            layout.addView(nameEditText, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                            LinearLayout.LayoutParams emailTextViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            emailTextViewParams.bottomMargin = 5;
+                            layout.addView(emailTextView,emailTextViewParams);
+                            layout.addView(emailEditText, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                            LinearLayout.LayoutParams msgTextViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            msgTextViewParams.bottomMargin = 5;
+                            layout.addView(msgTextView,msgTextViewParams);
+                            layout.addView(msgEditText, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                            new AlertDialog.Builder(IndividualCharityPageActivity.this)
+                                    .setTitle("Connect with Charity")
+                                    .setMessage("It's great to see you are interested in donating this item. " +
+                                            "Do you want to connect with a charity admin to complete the donation? " +
+                                            "If yes, enter your name and email below.")
+                                    .setView(layout)
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                           // Toast.makeText(((Dialog) dialog).getContext(), "send email" + documentSnapshot.get("name").toString(), Toast.LENGTH_SHORT).show();
+
+                                                try {
+                                                    Map<String, Object> emailObj = new HashMap<>();
+                                                    Map<String, Object> emailObjMessage = new HashMap<>();
+                                                    emailObj.put("to", Arrays.asList(new String[]{"ryanmechery@gmail.com"}));
+                                                    emailObjMessage.put("subject", documentSnapshot.get("name").toString() + " – An Aurora Charities User");
+                                                    String emailMessage = "Aurora Charities User named " + nameEditText.getText().toString() + " wants to donate " + documentSnapshot.get("name").toString()  + ".";
+                                                    if(emailEditText.getText().toString() != null){
+                                                        emailMessage +="\nYou can contact them at " + emailEditText.getText().toString() + ".";
+                                                    }
+                                                    if(msgEditText.getText().toString() != null){
+                                                        emailMessage += "\nTheir message was: \n\t\t" +  msgEditText.getText().toString();
+                                                    }
+                                                    emailMessage += "\n\nThanks,\n\tAurora Charities Development Team";
+                                                    emailObjMessage.put("text", emailMessage);
+                                                    emailObj.put("message", emailObjMessage);
+                                                    db.collection("mail").add(emailObj).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                            Toast.makeText(IndividualCharityPageActivity.this, "SUCCESS: Charity notified", Toast.LENGTH_SHORT);
+                                                        }
+                                                    });
+                                                } catch (Exception e) {
+                                                    Toast.makeText(((Dialog) dialog).getContext(), "App was unable to notify the charity. Please try again later." , Toast.LENGTH_SHORT).show();
+                                                    e.printStackTrace();
+                                                }
+
+                                        }
+                                    })
+
+                                    // A null listener allows the button to dismiss the dialog and take no further action.
+                                    .setNegativeButton(android.R.string.no, null)
+                                    .setIcon(android.R.drawable.ic_dialog_email)
+                                    .show();
+                        }
+                    });
+
+                    adapter.startListening();
+                }
             }
         });
 
