@@ -101,4 +101,6 @@
         <item>Toys and Games</item>
         <item>Other</item>
     </string-array>
+
+    <string name="registerUser"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdy3T6zJoR8fnnMNKWJLvcC6ScOzKO-Qf-uv2u_KukN4pjyog/viewform?usp=sf_link">Register as a Charity</a></string>
 </resources>
