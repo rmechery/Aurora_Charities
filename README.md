@@ -1,7 +1,13 @@
-# For Mrs. Taricco
+# Background
+Auroria Charities is an app developed by Bella Doyle, Ryan Mechery, Mateo Rollins and Raheel Sarwaar, in conjuction with Andy's Attic, Veterans Inc., ACE, and CASA. The app was developed to simplify the donation process between charities and end users. Code was developed with Android Studio on the frontend and Firebase on the backend. The app primarily allows charities to easily and efficiently list must-need items that end users can publicly see and donate to. The app was presented at the Massachusetts Academy of Math and Sciences Apps for Good Fair in 2022.
 
-Hi Mrs. Taricco, if you see this, you can demo the app as a charity admin by signing in with these credentials.
-* Username: ataricco@wpi.edu
-* Password: ILoveNullPointerErrors<br>
- 
-This will allow you to become an ACE charity admin for testing purposes. 
+# Poster
+![poster.png](poster.png)
+
+# Demo
+![demo.gif](demo.gif)
+
+
+
+
+
